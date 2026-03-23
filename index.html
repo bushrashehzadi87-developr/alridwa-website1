@@ -1,0 +1,5129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AL-RAWDAN</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0; 
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: rgb(124, 120, 120);
+            min-width: 100px;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+            height: auto;
+            min-height: 150px;
+            flex-wrap: wrap;
+            background-color: #000;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo-section:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-img {
+            height: 70px;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+            max-width: 100%;
+        }
+        
+        .logo-img:hover {
+            transform: rotate(-360deg);
+        }
+        
+        .logo-text h1 {
+            font-size: 52px;
+            color: #FFD700;
+            transition: color 0.3s ease;
+        }
+        
+        .logo-text p {
+            font-size: 17px;
+            color: #FFD700;
+            transition: color 0.3s ease;
+        }
+        
+        .logo-section:hover .logo-text h1,
+        .logo-section:hover .logo-text p {
+            color: #fff;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #000;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #FFD700;
+            margin: 0 15px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 30px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a i {
+            margin-right: 5px;
+            font-size: 16px;
+            color: #FFD700;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #fff;
+        }
+        
+        .nav-links a:hover i {
+            color: #fff;
+            transform: scale(1.1);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 25px;
+            left: 20px;
+            background-color: #FFD700;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: calc(100% - 40px);
+        }
+        
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFD700, #FFFACD);
+            z-index: -1;
+            border-radius: 5px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .language-switcher {
+            position: relative;
+            margin-left: 20px;
+        }
+        
+        .language-btn {
+            background: none;
+            border: none;
+            color: #000;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background-color: #FFD700;
+        }
+        
+        .language-btn:hover {
+            background-color: #FFFACD;
+            transform: translateY(-2px);
+        }
+        
+        .language-btn i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .language-btn:hover i {
+            transform: rotate(180deg);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+            z-index: 100;
+            min-width: 120px;
+            overflow: hidden;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .language-dropdown a {
+            display: block;
+            padding: 8px 15px;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .language-dropdown a:hover {
+            background-color: #FFFACD;
+            color: #000;
+            padding-left: 20px;
+        }
+        
+        .language-switcher:hover .language-dropdown {
+            display: block;
+        }
+        
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFD700;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 1001;
+        }
+        
+        /* RTL styles for Arabic and Urdu */
+        body[dir="rtl"] .logo-section {
+            flex-direction: row-reverse;
+        }
+        
+        body[dir="rtl"] .logo-img {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+        
+        body[dir="rtl"] .nav-links {
+            flex-direction: row-reverse;
+        }
+        
+        body[dir="rtl"] .nav-links a i {
+            margin-right: 0;
+            margin-left: 5px;
+        }
+        
+        body[dir="rtl"] .language-btn i {
+            margin-left: 0;
+            margin-right: 5px;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 1200px) {
+            .logo-text h1 {
+                font-size: 42px;
+            }
+            
+            .logo-text p {
+                font-size: 15px;
+            }
+            
+            .logo-img {
+                height: 60px;
+            }
+            
+            .nav-links a {
+                padding: 20px 15px;
+                margin: 0 10px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .logo-text h1 {
+                font-size: 36px;
+            }
+            
+            .logo-text p {
+                font-size: 14px;
+            }
+            
+            .logo-img {
+                height: 50px;
+            }
+            
+            .nav-links a {
+                padding: 15px 10px;
+                margin: 0 5px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px;
+                min-height: auto;
+            }
+            
+            .logo-section {
+                flex-direction: column;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            .logo-img {
+                margin-right: 0;
+                margin-bottom: 10px;
+                height: 80px;
+            }
+            
+            .logo-text h1 {
+                font-size: 36px;
+                margin-bottom: 5px;
+            }
+            
+            .logo-text p {
+                font-size: 14px;
+            }
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                padding: 20px;
+                z-index: 999;
+            }
+            
+            .nav-links.show {
+                display: flex;
+            }
+            
+            .nav-links a {
+                margin: 10px 0;
+                padding: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .language-switcher {
+                margin-left: 0;
+                margin-top: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .language-dropdown {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+            }
+        }
+
+        /* ===== NEW HERO SECTION (below navbar) ===== */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #FFD700; /* yellow text */
+            padding: 0 20px;
+            position: relative;
+            width: 100%;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #FFD700;
+            transition: all 0.4s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-title:hover {
+            text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+            transform: scale(1.05);
+            letter-spacing: 2px;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: #FFD700;
+            transition: all 0.4s ease;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .hero-subtitle:hover {
+            text-shadow: 0 0 15px #FFD700, 0 0 30px #FFD700;
+            transform: scale(1.02);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            padding: 16px 45px;
+            font-size: 20px;
+            font-weight: 700;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background-color: #FFD700;
+            color: #000;
+            border: 2px solid #FFD700;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-btn:hover {
+            background-color: transparent;
+            color: #FFD700;
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.5);
+            border-color: #FFD700;
+        }
+
+        /* Responsive adjustments for hero */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 48px;
+            }
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            .hero-btn {
+                padding: 14px 35px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 90vh;
+            }
+            .hero-title {
+                font-size: 40px;
+            }
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            .hero-btn {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            .hero-buttons {
+                gap: 15px;
+            }
+            .hero-btn {
+                padding: 10px 25px;
+                font-size: 15px;
+            }
+        }
+
+        /* About Section Styles (modified per request) */
+        .about-section {
+            background-color: #808080;
+            padding: 60px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 42px;
+            color: #FFD700;
+            margin-bottom: 15px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #000;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* About Company Section */
+        .about-company {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch; /* make children same height */
+            margin-bottom: 80px;
+            gap: 40px;
+            overflow: hidden;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            background-color: #000;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 2px solid #FFD700; /* yellow border added */
+            transition: all 0.4s ease;
+            min-height: 450px; /* uniform height with mission/vision/image */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .about-text:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.3);
+            background-color: #111;
+        }
+        
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #FFD700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .about-text h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FFD700; /* changed to yellow */
+            bottom: 0;
+            left: 0;
+        }
+        
+        .about-text p {
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #FFD700;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s forwards;
+            line-height: 1.6;
+        }
+        
+        .about-text p:nth-child(2) { animation-delay: 0.2s; }
+        .about-text p:nth-child(3) { animation-delay: 0.4s; }
+        .about-text p:nth-child(4) { animation-delay: 0.6s; }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform: translateX(100%);
+            opacity: 0;
+            animation: slideInFromRight 1s forwards 0.3s;
+            height: 450px; /* fixed height to match cards */
+            border: 2px solid #FFD700; /* added yellow border for consistency */
+        }
+        
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 10px;
+        }
+        
+        .about-image:hover::before {
+            opacity: 1;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-10px) translateX(0);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            max-width: 100%;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Mission & Vision */
+        .mission-vision {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 80px;
+            align-items: stretch; /* equal height */
+        }
+        
+        .mission, .vision {
+            flex: 1;
+            min-width: 300px;
+            background: #000;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            border: 2px solid #FFD700;
+            min-height: 450px; /* same as about-text and image */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .mission {
+            animation: fadeInUp 0.8s forwards 0.4s;
+        }
+        
+        .vision {
+            animation: fadeInUp 0.8s forwards 0.6s;
+        }
+        
+        .mission:hover, .vision:hover {
+            transform: translateY(-10px) !important;
+            box-shadow: 0 15px 30px rgba(255,215,0,0.3);
+            background-color: #111;
+        }
+        
+        .mission h3, .vision h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #FFD700;
+            display: flex;
+            align-items: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FFD700; /* changed to yellow */
+        }
+        
+        .mission h3 i, .vision h3 i {
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+            color: #FFD700;
+        }
+        
+        .mission:hover h3 i, .vision:hover h3 i {
+            transform: rotate(360deg);
+        }
+        
+        .mission p, .vision p {
+            color: #FFD700;
+            line-height: 1.6;
+        }
+        
+        /* Why Choose Us */
+        .why-choose-us {
+            background: #333;
+            color: white;
+            padding: 50px;
+            border-radius: 10px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: scaleIn 0.8s forwards 0.8s;
+            height: 600px;
+            background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+        }
+        
+        .why-choose-us::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 0;
+        }
+        
+        .why-choose-us-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .why-choose-us h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #FFD700;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .why-choose-us h3::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .why-choose-us p {
+            margin-bottom: 30px;
+            color: #FFD700;
+            font-size: 18px;
+        }
+        
+        .reasons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .reason {
+            flex: 1;
+            min-width: 250px;
+            background: rgba(51, 51, 51, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #FFD700;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .reason:nth-child(1) { animation: fadeInUp 0.6s forwards 1s; }
+        .reason:nth-child(2) { animation: fadeInUp 0.6s forwards 1.2s; }
+        .reason:nth-child(3) { animation: fadeInUp 0.6s forwards 1.4s; }
+        .reason:nth-child(4) { animation: fadeInUp 0.6s forwards 1.6s; }
+        
+        .reason:hover {
+            transform: translateY(-10px) !important;
+            background: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.2);
+        }
+        
+        .reason h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #FFD700;
+        }
+        
+        .reason p {
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        /* Certifications */
+        .certifications {
+            margin-bottom: 80px;
+            background-color: #808080;
+            padding: 40px;
+            border-radius: 10px;
+        }
+        
+        .certs-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .cert-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+            padding: 30px;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            border: 2px solid #FFD700;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cert-item:nth-child(1) { animation: slideInFromBottom 0.6s forwards 1s; }
+        .cert-item:nth-child(2) { animation: slideInFromBottom 0.6s forwards 1.2s; }
+        .cert-item:nth-child(3) { animation: slideInFromBottom 0.6s forwards 1.4s; }
+        .cert-item:nth-child(4) { animation: slideInFromBottom 0.6s forwards 1.6s; }
+        
+        .cert-item:hover {
+            transform: translateY(-15px) rotate(360deg) !important;
+            box-shadow: 0 15px 30px rgba(255,215,0,0.3);
+        }
+        
+        .cert-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            max-width: 100%;
+        }
+        
+        .cert-item:hover img {
+            transform: scale(1.2);
+        }
+        
+        .cert-item p {
+            color: #FFD700;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        /* Team Section - updated: removed fixed height, added margin-top */
+        .team-section {
+            background-color: #808080;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 80px;
+        }
+        
+        .team-section h3 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #FFD700;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-bottom: 10px;
+        }
+        
+        .team-section h3::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background: #000;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .team-member {
+            width: 250px;
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(-100px) rotate(-15deg);
+            border: 2px solid #FFD700;
+        }
+        
+        .team-member:nth-child(1) { animation: rotateIn 0.8s forwards 1s; }
+        .team-member:nth-child(2) { animation: rotateIn 0.8s forwards 1.2s; }
+        .team-member:nth-child(3) { animation: rotateIn 0.8s forwards 1.4s; }
+        .team-member:nth-child(4) { animation: rotateIn 0.8s forwards 1.6s; }
+        
+        .team-member:hover {
+            transform: translateY(-15px) rotate(0deg) !important;
+            box-shadow: 0 20px 40px rgba(255,215,0,0.3);
+        }
+        
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            margin-top: 15px; /* added margin-top */
+        }
+        
+        .member-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,215,0,0.1), rgba(255,215,0,0.3));
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .team-member:hover .member-image::before {
+            opacity: 1;
+        }
+        
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            max-width: 100%;
+        }
+        
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+        
+        .member-info {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .member-info h4 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #FFD700;
+        }
+        
+        .member-info p {
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: translateY(-100px) rotate(-15deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .about-image {
+                height: 400px; /* adjusted for responsiveness */
+            }
+            
+            .why-choose-us {
+                height: auto;
+                padding: 40px 30px;
+            }
+
+            .about-text, .mission, .vision {
+                min-height: 400px;
+            }
+            .about-image {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-company, .mission-vision {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                height: 350px;
+                transform: translateX(0);
+                opacity: 1;
+                animation: none;
+            }
+            
+            .about-text p {
+                opacity: 1;
+                transform: translateY(0);
+                animation: none;
+            }
+            
+            .mission, .vision {
+                opacity: 1;
+                transform: translateY(0);
+                animation: none !important;
+            }
+            
+            .why-choose-us {
+                opacity: 1;
+                transform: scale(1);
+                animation: none !important;
+            }
+            
+            .reason, .cert-item, .team-member {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg) !important;
+                animation: none !important;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+            }
+
+            .about-text, .mission, .vision, .about-image {
+                min-height: auto; /* let content determine height on mobile */
+                height: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .cert-item {
+                min-width: 150px;
+                max-width: 200px;
+                height: 250px;
+            }
+            
+            .team-member {
+                width: 200px;
+            }
+            
+            .member-image {
+                height: 200px;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .why-choose-us h3 {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .about-text, .mission, .vision {
+                padding: 20px;
+            }
+            
+            .certifications, .team-section {
+                padding: 30px 15px;
+            }
+            
+            .cert-item {
+                min-width: 120px;
+                max-width: 160px;
+                height: 220px;
+                padding: 20px;
+            }
+            
+            .cert-item img {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+
+        /* Offerings Section */
+        .offerings-section {
+            padding: 80px 20px;
+            background-color: #000;
+            text-align: center;
+            height: auto; /* changed from fixed height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .offerings-section h2 {
+            font-size: 42px;
+            color: #FFD700;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .offerings-section h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #FFD700;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .offerings-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .offering-box {
+            background-color: #333;
+            border-left: 6px solid #FFD700;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: left;
+            flex: 1 1 45%;
+            transition: all 0.5s ease;
+            min-width: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .offering-box:hover {
+            transform: translateY(-15px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.3);
+            background-color: #444;
+        }
+
+        .offering-box h3 {
+            color: #FFD700;
+            margin-bottom: 25px;
+            font-size: 26px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .offering-box h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+        }
+
+        .offering-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .offering-box ul li {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #fff;
+            position: relative;
+            padding-left: 35px;
+            line-height: 1.6;
+        }
+
+        .offering-box ul li::before {
+            content: "✔";
+            color: #FFD700;
+            margin-right: 15px;
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .offering-box:hover ul li::before {
+            transform: scale(1.3);
+        }
+
+        @media (max-width: 1200px) {
+            .offerings-section {
+                height: auto;
+                padding: 60px 20px;
+            }
+            
+            .offering-box {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .offering-box {
+                flex: 1 1 100%;
+                min-width: 250px;
+            }
+            
+            .offerings-section h2 {
+                font-size: 36px;
+                margin-bottom: 40px;
+            }
+            
+            .offering-box h3 {
+                font-size: 22px;
+            }
+            
+            .offering-box ul li {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .offerings-section h2 {
+                font-size: 32px;
+            }
+            
+            .offering-box {
+                padding: 25px;
+            }
+            
+            .offering-box h3 {
+                font-size: 20px;
+            }
+            
+            .offering-box ul li {
+                font-size: 15px;
+                padding-left: 30px;
+            }
+        }
+
+        /* Jobs Section Styles */
+        .jobs-section {
+            padding: 80px 0;
+            background-color: #808080 !important;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .jobs-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .jobs-section .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .jobs-section .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            color: #FFD700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .jobs-section .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #000;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .jobs-section .section-title p {
+            font-size: 18px;
+            color: #FFD700;
+        }
+        
+        /* Job Filters */
+        .job-filters {
+            padding: 25px;
+            border-radius: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+            background-color: #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            margin-right: 15px;
+            font-weight: 600;
+            color: #FFD700;
+            min-width: 80px;
+        }
+        
+        .filter-group select, 
+        .filter-group input {
+            padding: 12px 15px;
+            border: 2px solid #FFD700;
+            border-radius: 6px;
+            min-width: 150px;
+            flex: 1;
+            background-color: #000;
+            color: #FFD700;
+            font-size: 16px;
+        }
+        
+        .filter-group select:focus, 
+        .filter-group input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .filter-btn {
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background-color: #FFD700;
+            color: #000;
+            font-size: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            flex: 0 0 auto;
+        }
+        
+        .filter-btn:hover {
+            background-color: #000;
+            color: #FFD700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+        
+        /* Job Listings - now 3 cards */
+        .job-listings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .job-card {
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+            border: 2px solid #FFD700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255,215,0,0.3);
+        }
+        
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #333;
+        }
+        
+        .job-header h3 {
+            font-size: 22px;
+            margin: 0;
+            color: #FFD700;
+        }
+        
+        .job-badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .job-details {
+            margin-bottom: 20px;
+        }
+        
+        .job-details p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            font-size: 16px;
+        }
+        
+        .job-details i {
+            margin-right: 12px;
+            color: #FFD700;
+            font-size: 18px;
+            min-width: 20px;
+        }
+        
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .job-skills span {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            background-color: #333;
+            color: #FFD700;
+            border: 1px solid #FFD700;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            background-color: #FFD700;
+            color: #000;
+            font-size: 16px;
+            border: 2px solid #FFD700;
+        }
+        
+        .apply-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .apply-btn:hover::before {
+            right: 100%;
+        }
+        
+        .apply-btn:hover {
+            background-color: #000 !important;
+            color: #FFD700;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+        
+        .view-all-jobs {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .view-all-btn {
+            background-color: #000; /* black background */
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #FFD700;
+            color: #FFD700; /* yellow text */
+            font-size: 18px;
+        }
+        
+        .view-all-btn:hover {
+            background-color: #FFD700; /* yellow background on hover */
+            color: #000 !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+        
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .job-card {
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .job-card:nth-child(1) { animation-delay: 0.1s; }
+        .job-card:nth-child(2) { animation-delay: 0.2s; }
+        .job-card:nth-child(3) { animation-delay: 0.3s; }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .jobs-section {
+                height: auto;
+                padding: 60px 0;
+            }
+            
+            .job-listings {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .jobs-section .section-title h2 {
+                font-size: 36px;
+            }
+            
+            .job-filters {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .filter-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .jobs-section .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .job-listings {
+                grid-template-columns: 1fr;
+            }
+            
+            .job-card {
+                padding: 20px;
+            }
+            
+            .job-header h3 {
+                font-size: 20px;
+            }
+            
+            .job-details p {
+                font-size: 15px;
+            }
+            
+            .view-all-btn {
+                padding: 12px 30px;
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .jobs-section .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .job-filters {
+                padding: 20px;
+            }
+            
+            .filter-group label {
+                min-width: 70px;
+                font-size: 14px;
+                margin-right: 10px;
+            }
+            
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .job-badge {
+                margin-top: 10px;
+            }
+        }
+
+        /* Client Assistance Section Styles - MODIFIED TO 5 CARDS */
+        .client-assistance {
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+            padding: 80px 0;
+            height: auto; /* removed fixed height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .client-assistance .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .client-assistance .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .client-assistance .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            display: inline-block;
+            color: #FFD700;
+            position: relative;
+        }
+        
+        .client-assistance .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #FFD700;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .client-assistance .section-title h2:hover {
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            transform: scale(1.05);
+        }
+        
+        .client-assistance .section-title p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #FFD700;
+        }
+        
+        /* Assistance steps - now flexbox for 3+2 centered layout */
+        .assistance-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .step-box {
+            width: 300px; /* fixed width for desktop to ensure 3 per row */
+            background-color: #000;
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #FFD700;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+        }
+        
+        /* Animation Classes */
+        .left-box {
+            transform: translateX(-100px);
+            animation: slideInFromLeft 0.8s forwards;
+        }
+        
+        .right-box {
+            transform: translateX(100px);
+            animation: slideInFromRight 0.8s forwards;
+        }
+        
+        /* Animation Delays for 5 cards */
+        .step-box:nth-child(1) { animation-delay: 0.2s; }
+        .step-box:nth-child(2) { animation-delay: 0.4s; }
+        .step-box:nth-child(3) { animation-delay: 0.6s; }
+        .step-box:nth-child(4) { animation-delay: 0.8s; }
+        .step-box:nth-child(5) { animation-delay: 1.0s; }
+        
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideInFromRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .step-box:hover {
+            transform: translateY(-15px) !important;
+            border-color: #fff;
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+            background-color: #111;
+        }
+        
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
+            background-color: #FFD700;
+            color: #000;
+            border: 2px solid #FFD700;
+        }
+        
+        .step-box:hover .step-icon {
+            transform: rotate(360deg);
+            background-color: #000;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+        
+        .step-box h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #FFD700;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .step-box h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+            transition: all 0.3s;
+        }
+        
+        .step-box:hover h3::after {
+            width: 80px;
+            background: #fff;
+        }
+        
+        .step-box p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+            color: #fff;
+            transition: all 0.3s;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        
+        .step-box:hover p {
+            color: #FFD700 !important;
+        }
+        
+        .step-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            width: 100%;
+            background-color: #000;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+            font-size: 16px;
+        }
+        
+        .step-btn:hover {
+            background-color: #FFD700 !important;
+            color: #000 !important;
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+            transform: translateY(-3px);
+        }
+        
+        .step-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,215,0,0.1);
+            z-index: -1;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .step-btn:hover::after {
+            opacity: 1;
+        }
+        
+        /* Responsive Design for client assistance */
+        @media (max-width: 1200px) {
+            .client-assistance {
+                height: auto;
+                padding: 60px 0;
+            }
+            
+            .step-box {
+                min-height: 280px;
+                padding: 25px;
+                width: 280px; /* slightly smaller for medium screens */
+            }
+            
+            .step-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .step-box h3 {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .client-assistance .section-title h2 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .assistance-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step-box {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .client-assistance .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .client-assistance .section-title p {
+                font-size: 16px;
+            }
+            
+            /* Mobile animations - all boxes come from bottom */
+            .left-box, .right-box {
+                animation: slideInFromBottom 0.8s forwards !important;
+                transform: translateY(50px) !important;
+            }
+            
+            @keyframes slideInFromBottom {
+                from {
+                    transform: translateY(50px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .client-assistance .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .step-box {
+                min-height: 250px;
+                padding: 20px;
+            }
+            
+            .step-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .step-box h3 {
+                font-size: 20px;
+            }
+            
+            .step-box p {
+                font-size: 15px;
+            }
+            
+            .step-btn {
+                padding: 12px 20px;
+            }
+        }
+
+        /* Contact Section Styles - UPDATED: removed form, side by side info & chat */
+        .contact-section {
+            position: relative;
+            overflow: hidden;
+            background-color: #000;
+            padding: 80px 0;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .contact-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .contact-section .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contact-section .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            display: inline-block;
+            color: #FFD700;
+            position: relative;
+        }
+        
+        .contact-section .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #FFD700;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .contact-section .section-title h2:hover {
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+            transform: scale(1.05);
+        }
+        
+        .contact-section .section-title p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #FFD700;
+        }
+        
+        /* New two-column layout for contact info and chat */
+        .contact-info-chat {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+        }
+        
+        .contact-info {
+            flex: 1;
+            border-radius: 10px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            border: 2px solid #FFD700;
+            background-color: #000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .contact-info:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        .contact-info h4 {
+            margin-bottom: 30px;
+            color: #FFD700;
+            font-size: 28px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-info h4::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+        }
+        
+        /* Chat Box - now standalone */
+        .chat-box {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #FFD700;
+            background-color: #111;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+        }
+        
+        .chat-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+        }
+        
+        .chat-header {
+            background-color: #FFD700;
+            color: #000;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .chat-messages {
+            flex-grow: 1;
+            height: 300px; /* fixed height for better appearance */
+            overflow-y: auto;
+            padding: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: #FFD700 #333;
+            background-color: #000;
+        }
+        
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .chat-messages::-webkit-scrollbar-track {
+            background: #333;
+        }
+        
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #FFD700;
+            border-radius: 8px;
+        }
+        
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            max-width: 80%;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .bot-message {
+            background-color: #333;
+            color: #FFD700;
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            background-color: #FFD700;
+            color: #000;
+            margin-left: auto;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 15px;
+            background-color: #000;
+            border-top: 2px solid #333;
+        }
+        
+        .chat-input input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 2px solid #FFD700;
+            border-radius: 6px;
+            background-color: #111;
+            color: #FFD700;
+            font-size: 16px;
+            transition: all 0.3s;
+            max-width: 100%;
+        }
+        
+        .chat-input input:focus {
+            border-color: #fff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .chat-send-btn {
+            background-color: #FFD700;
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 0 20px;
+            margin-left: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .chat-send-btn:hover {
+            background-color: #000;
+            color: #FFD700;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+        
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-right: 20px;
+            transition: all 0.3s;
+            background-color: #FFD700;
+            color: #000;
+            flex-shrink: 0;
+        }
+        
+        .info-item:hover .info-icon {
+            transform: rotate(360deg);
+            background-color: #000 !important;
+            color: #FFD700 !important;
+            border: 2px solid #FFD700;
+        }
+        
+        .info-content h4 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #FFD700;
+        }
+        
+        .info-content a, .info-content p {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+        
+        .info-content a:hover {
+            color: #FFD700 !important;
+        }
+        
+        .map-container {
+            margin: 30px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid #FFD700;
+            height: 250px;
+        }
+        
+        .map-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            transition: all 0.4s ease;
+            background-color: #FFD700;
+            font-size: 20px;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) rotate(15deg);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.5);
+            background-color: #fff;
+        }
+        
+        /* Responsive Design for contact section */
+        @media (max-width: 992px) {
+            .contact-info-chat {
+                flex-direction: column;
+            }
+            
+            .contact-info, .chat-box {
+                width: 100%;
+            }
+            
+            .chat-messages {
+                height: 250px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .contact-section .section-title h2 {
+                font-size: 36px;
+            }
+            
+            .contact-info h4 {
+                font-size: 24px;
+            }
+            
+            .info-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+                margin-right: 15px;
+            }
+            
+            .info-content h4 {
+                font-size: 18px;
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-section .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .contact-section .section-title p {
+                font-size: 16px;
+            }
+            
+            .contact-info {
+                padding: 25px;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .info-icon {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Dashboard Section Styles */
+        .dashboard-section {
+            position: relative;
+            overflow: hidden;
+            background-color: #808080;
+            padding: 80px 0;
+            height: auto; /* removed fixed height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .dashboard-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .dashboard-section .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .dashboard-section .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            color: #FFD700;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dashboard-section .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #000;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .dashboard-section .section-title h2:hover {
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        
+        .dashboard-section .section-title p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #FFD700;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+        
+        .image-container {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            perspective: 1000px;
+        }
+        
+        .rotating-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 15px;
+            border: 3px solid #FFD700;
+            transition: transform 1s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .rotating-image:hover {
+            transform: rotateY(360deg);
+        }
+        
+        .features-container {
+            flex: 2;
+            min-width: 300px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .feature-box {
+            border-radius: 10px;
+            padding: 30px;
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #FFD700;
+            background-color: #000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.3);
+            border-color: #fff;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin: 0 auto 25px;
+            transition: all 0.5s ease;
+            background-color: #FFD700;
+            color: #000;
+            border: 2px solid #FFD700;
+        }
+        
+        .feature-box:hover .feature-icon {
+            transform: rotate(360deg);
+            background-color: #000;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+        
+        .feature-box h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #FFD700;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .feature-box h3::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s;
+        }
+        
+        .feature-box:hover h3::after {
+            width: 80px;
+            background: #fff;
+        }
+        
+        .feature-box p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #fff;
+            transition: all 0.3s;
+            font-size: 16px;
+        }
+        
+        .feature-box:hover p {
+            color: #FFD700 !important;
+        }
+        
+        .feature-btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background-color: #FFD700;
+            color: #000;
+            font-size: 16px;
+            border: 2px solid #FFD700;
+        }
+        
+        .feature-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.2);
+            transition: all 0.4s;
+        }
+        
+        .feature-btn:hover::before {
+            left: 0;
+        }
+        
+        .feature-btn:hover {
+            background-color: #000 !important;
+            color: #FFD700 !important;
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .dashboard-section {
+                height: auto;
+                padding: 60px 0;
+            }
+            
+            .rotating-image {
+                max-width: 350px;
+            }
+            
+            .feature-box {
+                padding: 25px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .feature-box h3 {
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            
+            .image-container {
+                order: 2;
+                margin-top: 40px;
+            }
+            
+            .features-container {
+                grid-template-columns: repeat(2, 1fr);
+                width: 100%;
+            }
+            
+            .dashboard-section .section-title h2 {
+                font-size: 36px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-section .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .dashboard-section .section-title p {
+                font-size: 16px;
+            }
+            
+            .feature-box {
+                padding: 20px;
+            }
+            
+            .feature-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+            
+            .feature-box h3 {
+                font-size: 20px;
+            }
+            
+            .feature-box p {
+                font-size: 15px;
+            }
+            
+            .feature-btn {
+                padding: 12px 20px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-section .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .rotating-image {
+                max-width: 300px;
+            }
+        }
+
+        /* Footer Section Styles - UPDATED for left-to-right columns */
+        .footer-section {
+            position: relative;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000;
+            padding: 80px 0 0;
+            height: auto; /* removed fixed height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .footer-section .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* exactly 4 columns on large screens */
+            gap: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-grid {
+                grid-template-columns: 1fr; /* 1 column on small screens */
+            }
+        }
+        
+        .footer-column {
+            padding: 0 15px;
+        }
+        
+        .footer-heading {
+            font-size: 24px;
+            margin-bottom: 25px;
+            position: relative;
+            transition: all 0.3s;
+            color: #FFD700;
+            padding-bottom: 10px;
+        }
+        
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 2px;
+            background: #FFD700;
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-heading:hover {
+            transform: translateX(5px);
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 35px;
+        }
+        
+        .footer-links li::before {
+            content: "•";
+            color: #FFD700;
+            font-size: 24px;
+            position: absolute;
+            left: 10px;
+            top: -5px;
+            transition: all 0.3s;
+        }
+        
+        .footer-links li:hover::before {
+            transform: scale(1.3);
+        }
+        
+        .footer-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            display: block;
+            padding: 5px 0;
+            position: relative;
+            font-size: 16px;
+        }
+        
+        .footer-links a i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+        
+        .footer-links a:hover i {
+            color: #fff;
+            transform: scale(1.3);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #FFD700;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.4s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #fff;
+            color: #000;
+            transform: translateY(-5px) rotate(15deg);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .footer-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+        
+        .contact-btn {
+            background-color: #FFD700;
+            color: #000;
+        }
+        
+        .support-btn {
+            background-color: #000;
+            color: #FFD700;
+            border: 2px solid #FFD700;
+        }
+        
+        .footer-btn:hover {
+            background-color: #fff !important;
+            color: #000 !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255,215,0,0.3);
+        }
+        
+        .footer-btn:hover i {
+            transform: scale(1.3);
+        }
+        
+        .footer-bottom {
+            background-color: #111;
+            color: #FFD700;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-bottom-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .legal-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .legal-links a {
+            text-decoration: none;
+            transition: all 0.3s;
+            color: #FFD700;
+            font-size: 15px;
+        }
+        
+        .legal-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            font-size: 15px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .legal-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .footer-buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .footer-btn {
+                flex: 1;
+                min-width: 150px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .footer-heading {
+                font-size: 18px;
+            }
+            
+            .footer-links li {
+                padding-left: 30px;
+            }
+            
+            .footer-links li::before {
+                font-size: 20px;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+        }
+
+        /* ===== JOB APPLICATION MODAL ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #000;
+            border: 2px solid #FFD700;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(255,215,0,0.3);
+            position: relative;
+        }
+
+        .modal-content h3 {
+            color: #FFD700;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            color: #FFD700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: #fff;
+        }
+
+        .modal-content .form-group {
+            margin-bottom: 20px;
+        }
+
+        .modal-content input,
+        .modal-content select,
+        .modal-content textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #FFD700;
+            border-radius: 6px;
+            background-color: #111;
+            color: #FFD700;
+            font-size: 16px;
+        }
+
+        .modal-content input:focus,
+        .modal-content select:focus,
+        .modal-content textarea:focus {
+            outline: none;
+            border-color: #fff;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+
+        .modal-content .submit-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background-color: #FFD700;
+            color: #000;
+            font-size: 18px;
+            border: 2px solid #FFD700;
+        }
+
+        .modal-content .submit-btn:hover {
+            background-color: #000;
+            color: #FFD700;
+        }
+
+        /* EXTREME SMALL SCREEN RESPONSIVENESS */
+        @media (max-width: 480px) {
+            .hero-title { font-size: 28px; }
+            .hero-subtitle { font-size: 14px; }
+            .hero-btn { padding: 8px 20px; font-size: 14px; }
+            .section-title h2 { font-size: 24px; }
+            .section-title h2::after { width: 60px; }
+            .about-text, .mission, .vision { min-height: auto; padding: 20px; }
+            .about-text h3 { font-size: 22px; }
+            .about-text p { font-size: 14px; }
+            .mission h3, .vision h3 { font-size: 20px; }
+            .mission p, .vision p { font-size: 14px; }
+            .why-choose-us h3 { font-size: 24px; }
+            .why-choose-us p { font-size: 16px; }
+            .reason h4 { font-size: 18px; }
+            .reason p { font-size: 14px; }
+            .cert-item { min-width: 120px; max-width: 140px; height: 200px; padding: 15px; }
+            .cert-item img { width: 60px; height: 60px; }
+            .cert-item p { font-size: 12px; }
+            .team-member { width: 180px; }
+            .member-image { height: 180px; }
+            .member-info h4 { font-size: 18px; }
+            .member-info p { font-size: 14px; }
+            .offerings-section h2 { font-size: 28px; }
+            .offering-box h3 { font-size: 20px; }
+            .offering-box ul li { font-size: 14px; padding-left: 25px; }
+            .jobs-section .section-title h2 { font-size: 28px; }
+            .job-filters { padding: 15px; }
+            .filter-group label { min-width: 60px; font-size: 12px; }
+            .filter-group select, .filter-group input { padding: 8px; font-size: 14px; }
+            .filter-btn { padding: 8px 20px; font-size: 14px; }
+            .job-card { padding: 15px; }
+            .job-header h3 { font-size: 18px; }
+            .job-details p { font-size: 14px; }
+            .job-skills span { font-size: 12px; padding: 4px 10px; }
+            .view-all-btn { padding: 10px 25px; font-size: 16px; }
+            .step-box { width: 100%; max-width: 300px; padding: 20px; min-height: 280px; }
+            .step-icon { width: 50px; height: 50px; font-size: 20px; }
+            .step-box h3 { font-size: 20px; }
+            .step-box p { font-size: 14px; }
+            .step-btn { padding: 10px; font-size: 14px; }
+            .contact-info { padding: 20px; }
+            .contact-info h4 { font-size: 22px; }
+            .info-icon { width: 40px; height: 40px; font-size: 16px; margin-right: 10px; }
+            .info-content h4 { font-size: 18px; }
+            .info-content a, .info-content p { font-size: 14px; }
+            .map-container { height: 200px; }
+            .social-icon { width: 35px; height: 35px; font-size: 16px; }
+            .chat-header { font-size: 16px; padding: 10px; }
+            .chat-messages { height: 200px; }
+            .chat-input input { padding: 8px; font-size: 14px; }
+            .chat-send-btn { padding: 0 15px; font-size: 14px; }
+            .dashboard-section .section-title h2 { font-size: 28px; }
+            .feature-box { padding: 20px; }
+            .feature-icon { width: 50px; height: 50px; font-size: 20px; }
+            .feature-box h3 { font-size: 18px; }
+            .feature-box p { font-size: 14px; }
+            .feature-btn { padding: 10px; font-size: 14px; max-width: 150px; }
+            .footer-heading { font-size: 20px; }
+            .footer-links a { font-size: 14px; }
+            .footer-btn { padding: 10px; font-size: 14px; }
+            .legal-links a { font-size: 12px; }
+            .copyright { font-size: 12px; }
+        }
+
+        @media (max-width: 320px) {
+            .hero-title { font-size: 24px; }
+            .hero-subtitle { font-size: 12px; }
+            .hero-btn { padding: 6px 15px; font-size: 12px; }
+            .section-title h2 { font-size: 20px; }
+            .about-text h3 { font-size: 20px; }
+            .about-text p { font-size: 12px; }
+            .mission h3, .vision h3 { font-size: 18px; }
+            .mission p, .vision p { font-size: 12px; }
+            .why-choose-us h3 { font-size: 20px; }
+            .why-choose-us p { font-size: 14px; }
+            .reason h4 { font-size: 16px; }
+            .reason p { font-size: 12px; }
+            .cert-item { min-width: 100px; max-width: 120px; height: 180px; }
+            .cert-item img { width: 50px; height: 50px; }
+            .team-member { width: 150px; }
+            .member-image { height: 150px; }
+            .member-info h4 { font-size: 16px; }
+            .member-info p { font-size: 12px; }
+            .offerings-section h2 { font-size: 24px; }
+            .offering-box h3 { font-size: 18px; }
+            .offering-box ul li { font-size: 12px; }
+            .jobs-section .section-title h2 { font-size: 24px; }
+            .filter-group { min-width: 100%; }
+            .filter-group label { min-width: 50px; font-size: 10px; }
+            .job-card { padding: 10px; }
+            .job-header h3 { font-size: 16px; }
+            .job-details p { font-size: 12px; }
+            .job-skills span { font-size: 10px; padding: 3px 8px; }
+            .view-all-btn { padding: 8px 20px; font-size: 14px; }
+            .step-box { padding: 15px; min-height: 250px; }
+            .step-icon { width: 40px; height: 40px; font-size: 18px; }
+            .step-box h3 { font-size: 18px; }
+            .step-box p { font-size: 12px; }
+            .step-btn { padding: 8px; font-size: 12px; }
+            .contact-info { padding: 15px; }
+            .contact-info h4 { font-size: 20px; }
+            .info-icon { width: 35px; height: 35px; font-size: 14px; }
+            .info-content h4 { font-size: 16px; }
+            .info-content a, .info-content p { font-size: 12px; }
+            .map-container { height: 150px; }
+            .social-icon { width: 30px; height: 30px; font-size: 14px; }
+            .chat-header { font-size: 14px; }
+            .chat-messages { height: 150px; }
+            .chat-input input { font-size: 12px; }
+            .chat-send-btn { font-size: 12px; }
+            .dashboard-section .section-title h2 { font-size: 24px; }
+            .feature-box { padding: 15px; }
+            .feature-icon { width: 40px; height: 40px; font-size: 18px; }
+            .feature-box h3 { font-size: 16px; }
+            .feature-box p { font-size: 12px; }
+            .feature-btn { padding: 8px; font-size: 12px; max-width: 120px; }
+            .footer-heading { font-size: 18px; }
+            .footer-links a { font-size: 12px; }
+            .footer-btn { padding: 8px; font-size: 12px; }
+            .legal-links a { font-size: 10px; }
+            .copyright { font-size: 10px; }
+        }
+
+        @media (max-width: 240px) {
+            .hero-title { font-size: 18px; }
+            .hero-subtitle { font-size: 10px; }
+            .hero-btn { padding: 4px 10px; font-size: 10px; border-radius: 30px; }
+            .section-title h2 { font-size: 16px; }
+            .about-text h3 { font-size: 16px; }
+            .about-text p { font-size: 10px; }
+            .mission h3, .vision h3 { font-size: 14px; }
+            .mission p, .vision p { font-size: 10px; }
+            .why-choose-us h3 { font-size: 16px; }
+            .why-choose-us p { font-size: 12px; }
+            .reason h4 { font-size: 14px; }
+            .reason p { font-size: 10px; }
+            .cert-item { min-width: 80px; max-width: 100px; height: 150px; padding: 10px; }
+            .cert-item img { width: 40px; height: 40px; }
+            .team-member { width: 120px; }
+            .member-image { height: 120px; }
+            .member-info h4 { font-size: 14px; }
+            .member-info p { font-size: 10px; }
+            .offerings-section h2 { font-size: 20px; }
+            .offering-box h3 { font-size: 16px; }
+            .offering-box ul li { font-size: 10px; padding-left: 20px; }
+            .jobs-section .section-title h2 { font-size: 20px; }
+            .job-filters { padding: 10px; }
+            .filter-group label { min-width: 40px; font-size: 8px; }
+            .filter-group select, .filter-group input { padding: 5px; font-size: 10px; }
+            .filter-btn { padding: 5px 15px; font-size: 10px; }
+            .job-card { padding: 8px; }
+            .job-header h3 { font-size: 14px; }
+            .job-details p { font-size: 10px; }
+            .job-skills span { font-size: 8px; padding: 2px 5px; }
+            .view-all-btn { padding: 5px 15px; font-size: 12px; }
+            .step-box { padding: 10px; min-height: 220px; }
+            .step-icon { width: 30px; height: 30px; font-size: 14px; }
+            .step-box h3 { font-size: 16px; }
+            .step-box p { font-size: 10px; }
+            .step-btn { padding: 5px; font-size: 10px; }
+            .contact-info { padding: 10px; }
+            .contact-info h4 { font-size: 16px; }
+            .info-icon { width: 30px; height: 30px; font-size: 12px; }
+            .info-content h4 { font-size: 14px; }
+            .info-content a, .info-content p { font-size: 10px; }
+            .map-container { height: 100px; }
+            .social-icon { width: 25px; height: 25px; font-size: 12px; }
+            .chat-header { font-size: 12px; }
+            .chat-messages { height: 120px; }
+            .chat-input input { font-size: 10px; }
+            .chat-send-btn { font-size: 10px; }
+            .dashboard-section .section-title h2 { font-size: 20px; }
+            .feature-box { padding: 10px; }
+            .feature-icon { width: 30px; height: 30px; font-size: 14px; }
+            .feature-box h3 { font-size: 14px; }
+            .feature-box p { font-size: 10px; }
+            .feature-btn { padding: 5px; font-size: 10px; max-width: 100px; }
+            .footer-heading { font-size: 16px; }
+            .footer-links a { font-size: 10px; }
+            .footer-btn { padding: 5px; font-size: 10px; }
+            .legal-links a { font-size: 8px; }
+            .copyright { font-size: 8px; }
+        }
+
+        @media (max-width: 160px) {
+            .hero-title { font-size: 14px; }
+            .hero-subtitle { font-size: 8px; }
+            .hero-btn { padding: 2px 5px; font-size: 8px; }
+            .section-title h2 { font-size: 12px; }
+            .about-text h3 { font-size: 12px; }
+            .about-text p { font-size: 8px; }
+            .mission h3, .vision h3 { font-size: 12px; }
+            .mission p, .vision p { font-size: 8px; }
+            .why-choose-us h3 { font-size: 12px; }
+            .why-choose-us p { font-size: 10px; }
+            .reason h4 { font-size: 12px; }
+            .reason p { font-size: 8px; }
+            .cert-item { min-width: 60px; max-width: 80px; height: 120px; padding: 5px; }
+            .cert-item img { width: 30px; height: 30px; }
+            .team-member { width: 90px; }
+            .member-image { height: 90px; }
+            .member-info h4 { font-size: 12px; }
+            .member-info p { font-size: 8px; }
+            .offerings-section h2 { font-size: 16px; }
+            .offering-box h3 { font-size: 12px; }
+            .offering-box ul li { font-size: 8px; padding-left: 15px; }
+            .jobs-section .section-title h2 { font-size: 16px; }
+            .job-filters { padding: 5px; }
+            .filter-group label { min-width: 30px; font-size: 6px; }
+            .filter-group select, .filter-group input { padding: 3px; font-size: 8px; }
+            .filter-btn { padding: 3px 10px; font-size: 8px; }
+            .job-card { padding: 5px; }
+            .job-header h3 { font-size: 12px; }
+            .job-details p { font-size: 8px; }
+            .job-skills span { font-size: 6px; padding: 1px 3px; }
+            .view-all-btn { padding: 3px 10px; font-size: 10px; }
+            .step-box { padding: 5px; min-height: 180px; }
+            .step-icon { width: 25px; height: 25px; font-size: 12px; margin-bottom: 10px; }
+            .step-box h3 { font-size: 12px; }
+            .step-box p { font-size: 8px; margin-bottom: 15px; }
+            .step-btn { padding: 3px; font-size: 8px; }
+            .contact-info { padding: 5px; }
+            .contact-info h4 { font-size: 14px; }
+            .info-icon { width: 25px; height: 25px; font-size: 10px; margin-right: 5px; }
+            .info-content h4 { font-size: 12px; }
+            .info-content a, .info-content p { font-size: 8px; }
+            .map-container { height: 80px; }
+            .social-icon { width: 20px; height: 20px; font-size: 10px; }
+            .chat-header { font-size: 10px; }
+            .chat-messages { height: 100px; }
+            .chat-input input { font-size: 8px; }
+            .chat-send-btn { font-size: 8px; }
+            .dashboard-section .section-title h2 { font-size: 16px; }
+            .feature-box { padding: 5px; }
+            .feature-icon { width: 25px; height: 25px; font-size: 12px; margin-bottom: 10px; }
+            .feature-box h3 { font-size: 12px; }
+            .feature-box p { font-size: 8px; }
+            .feature-btn { padding: 3px; font-size: 8px; max-width: 80px; }
+            .footer-heading { font-size: 14px; }
+            .footer-links a { font-size: 8px; }
+            .footer-btn { padding: 3px; font-size: 8px; }
+            .legal-links a { font-size: 6px; }
+            .copyright { font-size: 6px; }
+        }
+
+        @media (max-width: 100px) {
+            body { font-size: 6px; }
+            .hero-title { font-size: 10px; }
+            .hero-subtitle { font-size: 6px; }
+            .hero-btn { padding: 1px 3px; font-size: 6px; }
+            .section-title h2 { font-size: 8px; }
+            .about-text h3 { font-size: 8px; }
+            .about-text p { font-size: 6px; }
+            .mission h3, .vision h3 { font-size: 8px; }
+            .mission p, .vision p { font-size: 6px; }
+            .why-choose-us h3 { font-size: 8px; }
+            .why-choose-us p { font-size: 6px; }
+            .reason h4 { font-size: 8px; }
+            .reason p { font-size: 6px; }
+            .cert-item { min-width: 50px; max-width: 60px; height: 90px; padding: 2px; }
+            .cert-item img { width: 20px; height: 20px; }
+            .team-member { width: 70px; }
+            .member-image { height: 70px; }
+            .member-info h4 { font-size: 8px; }
+            .member-info p { font-size: 6px; }
+            .offerings-section h2 { font-size: 10px; }
+            .offering-box h3 { font-size: 8px; }
+            .offering-box ul li { font-size: 6px; padding-left: 10px; }
+            .jobs-section .section-title h2 { font-size: 10px; }
+            .job-filters { padding: 2px; }
+            .filter-group label { min-width: 20px; font-size: 4px; }
+            .filter-group select, .filter-group input { padding: 1px; font-size: 5px; }
+            .filter-btn { padding: 1px 5px; font-size: 5px; }
+            .job-card { padding: 2px; }
+            .job-header h3 { font-size: 8px; }
+            .job-details p { font-size: 5px; }
+            .job-skills span { font-size: 4px; padding: 1px; }
+            .view-all-btn { padding: 1px 5px; font-size: 6px; }
+            .step-box { padding: 2px; min-height: 120px; }
+            .step-icon { width: 20px; height: 20px; font-size: 8px; margin-bottom: 5px; }
+            .step-box h3 { font-size: 8px; }
+            .step-box p { font-size: 5px; margin-bottom: 8px; }
+            .step-btn { padding: 1px; font-size: 5px; }
+            .contact-info { padding: 2px; }
+            .contact-info h4 { font-size: 8px; }
+            .info-icon { width: 20px; height: 20px; font-size: 6px; margin-right: 2px; }
+            .info-content h4 { font-size: 6px; }
+            .info-content a, .info-content p { font-size: 4px; }
+            .map-container { height: 50px; }
+            .social-icon { width: 15px; height: 15px; font-size: 6px; }
+            .chat-header { font-size: 6px; }
+            .chat-messages { height: 60px; }
+            .chat-input input { font-size: 5px; }
+            .chat-send-btn { font-size: 5px; }
+            .dashboard-section .section-title h2 { font-size: 10px; }
+            .feature-box { padding: 2px; }
+            .feature-icon { width: 20px; height: 20px; font-size: 8px; margin-bottom: 5px; }
+            .feature-box h3 { font-size: 8px; }
+            .feature-box p { font-size: 5px; }
+            .feature-btn { padding: 1px; font-size: 5px; max-width: 50px; }
+            .footer-heading { font-size: 8px; }
+            .footer-links a { font-size: 5px; }
+            .footer-btn { padding: 1px; font-size: 5px; }
+            .legal-links a { font-size: 4px; }
+            .copyright { font-size: 4px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <div class="logo-section">
+            <img src="logo.jpg" alt="Company Logo" class="logo-img">
+            <div class="logo-text">
+                <h1>AL-RAWDAN</h1>
+                <p>AL-Rawdan Human Resources Development<br> Consulting Company</p>
+            </div>
+        </div>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="#home" class="active"><i class="fas fa-home"></i> <span class="nav-text">Home</span></a>
+            <a href="#about"><i class="fas fa-info-circle"></i> <span class="nav-text">About</span></a>
+            <a href="#services"><i class="fas fa-concierge-bell"></i> <span class="nav-text">Services</span></a>
+            <a href="#jobs"><i class="fas fa-briefcase"></i> <span class="nav-text">Jobs</span></a>
+            <a href="#faq"><i class="fas fa-question-circle"></i> <span class="nav-text">FAQ</span></a>
+            <a href="#contact"><i class="fas fa-envelope"></i> <span class="nav-text">Contact</span></a>
+            
+            <div class="language-switcher">
+                <button class="language-btn">
+                    <span class="current-language">English</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="language-dropdown">
+                    <a href="#" data-lang="en" data-dir="ltr">English</a>
+                    <a href="#" data-lang="ur" data-dir="rtl">اردو (Urdu)</a>
+                    <a href="#" data-lang="ar" data-dir="rtl">العربية (Arabic)</a>
+                    <a href="#" data-lang="qa" data-dir="rtl">قطري (Qatari)</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== NEW HERO SECTION (below navbar) ===== -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome to AL-RAWDAN</h1>
+            <p class="hero-subtitle">Your trusted partner in human resources development and recruitment solutions.</p>
+            <div class="hero-buttons">
+                <button class="hero-btn primary" onclick="alert('Get Started clicked! Welcome to AL-RAWDAN.')">Get Started</button>
+                <button class="hero-btn secondary" onclick="alert('Learn More clicked. We provide expert HR solutions.')">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Our Company</h2>
+            </div>
+            
+            <!-- Company Overview -->
+            <div class="about-company">
+                <div class="about-text">
+                    <h3>Who We Are</h3>
+                    <p>AL-RAWDAN is a leading recruitment agency specializing in connecting employers with skilled professionals across domestic and commercial sectors. Founded in 2010, we've grown to become a trusted partner for both job seekers and employers throughout the region.</p>
+                    <p>Our team of experienced recruiters understands the unique challenges of today's job market and works tirelessly to match the right talent with the right opportunities.</p>
+                    <p>With offices in multiple countries and a network of thousands of qualified professionals, we're equipped to handle staffing needs of any scale.</p>
+                </div>
+                <div class="about-image">
+                    <!-- FIXED IMAGE: updated with a high-quality, reliable office image -->
+                    <img src="alridwaa.jpg" alt="Our Office">
+                </div>
+            </div>
+            
+            <!-- Mission & Vision -->
+            <div class="mission-vision">
+                <div class="mission">
+                    <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                    <p>To bridge the gap between talent and opportunity by providing exceptional recruitment services that prioritize quality, integrity, and cultural fit. We aim to transform the employment landscape through innovative solutions and personalized service.</p>
+                    <p>Every placement we make is carefully vetted to ensure long-term success for both employers and employees.</p>
+                </div>
+                <div class="vision">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To become the most trusted workforce solutions provider in the region, recognized for our commitment to excellence and our positive impact on communities through meaningful employment opportunities.</p>
+                    <p>We envision a future where every individual has access to fulfilling work and every employer can find the perfect candidate.</p>
+                </div>
+            </div>
+            
+            <!-- Why Choose Us -->
+            <div class="why-choose-us">
+                <div class="why-choose-us-content">
+                    <h3>Why Choose AL-RAWDAN?</h3>
+                    <p>Our clients and candidates choose us because we deliver results with a human touch. Here's what sets us apart:</p>
+                    
+                    <div class="reasons">
+                        <div class="reason">
+                            <h4>Extensive Network</h4>
+                            <p>Access to thousands of pre-screened candidates across multiple industries and skill levels.</p>
+                        </div>
+                        <div class="reason">
+                            <h4>Cultural Expertise</h4>
+                            <p>Deep understanding of local and international workplace cultures for perfect matches.</p>
+                        </div>
+                        <div class="reason">
+                            <h4>Quality Assurance</h4>
+                            <p>Rigorous vetting process ensures only the most qualified candidates are presented.</p>
+                        </div>
+                        <div class="reason">
+                            <h4>Ongoing Support</h4>
+                            <p>Continuous assistance even after placement to ensure long-term satisfaction.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certifications -->
+            <div class="certifications">
+                <h3 class="section-title">Our Accreditations</h3>
+                <div class="certs-grid">
+                    <div class="cert-item">
+                        <img src="ministory.jpg" alt="Certification 1">
+                        <p>Ministry of Labor Approved</p>
+                    </div>
+                    <div class="cert-item">
+                        <img src="interntional.jpg" alt="Certification 2">
+                        <p>International Recruitment Standards</p>
+                    </div>
+                    <div class="cert-item">
+                        <img src="quality.jpg" alt="Certification 3">
+                        <p>Quality Management Certified</p>
+                    </div>
+                    <div class="cert-item">
+                        <img src="ethical.jpg" alt="Certification 4">
+                        <p>Ethical Recruitment Charter</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Team Section -->
+            <div class="team-section">
+                <h3>Meet Our Leadership Team</h3>
+                <div class="team-members">
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="1sr image.jpg" alt="Team Member">
+                        </div>
+                        <div class="member-info">
+                            <h4>Ahmed Al-Mansoori</h4>
+                            <p>Founder & CEO</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="2nd image.jpg" alt="Team Member">
+                        </div>
+                        <div class="member-info">
+                            <h4>Fatima Al-Hashimi</h4>
+                            <p>Director of Operations</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="3rd image.jpg" alt="Team Member">
+                        </div>
+                        <div class="member-info">
+                            <h4>Raj Patel</h4>
+                            <p>Head of Recruitment</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-image">
+                            <img src="4th image.jpg" alt="Team Member">
+                        </div>
+                        <div class="member-info">
+                            <h4>Maria Gonzalez</h4>
+                            <p>Training Director</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="offerings-section" id="services">
+        <h2>Our Offerings</h2>
+
+        <div class="offerings-container">
+            <!-- Box 1: Workforce Recruitment -->
+            <div class="offering-box">
+                <h3>1. Workforce Recruitment</h3>
+                <ul>
+                    <li>Employment in the domestic sector (housekeepers, chauffeurs, caregivers, etc.)</li>
+                    <li>Recruitment for the commercial sector (businesses, restaurants, construction…)</li>
+                </ul>
+            </div>
+
+            <!-- Box 2: Workforce Development -->
+            <div class="offering-box">
+                <h3>2. Workforce Development</h3>
+                <ul>
+                    <li>Linguistic and cultural training</li>
+                    <li>Vocational training (sanitation, culinary arts, driving…)</li>
+                    <li>Pre-travel preparation for workers</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section with 3 cards -->
+    <section class="jobs-section" id="jobs">
+        <div class="container">
+            <div class="section-title">
+                <h2>Job Opportunities</h2>
+                <p>Explore our latest job openings and find your perfect match</p>
+            </div>
+
+            <!-- Job Filters -->
+            <div class="job-filters">
+                <div class="filter-group">
+                    <label for="country-filter"><i class="fas fa-globe"></i> Country:</label>
+                    <select id="country-filter">
+                        <option value="all">All Countries</option>
+                        <option value="qatar">Qatar</option>
+                        <option value="uae">UAE</option>
+                        <option value="saudi">Saudi Arabia</option>
+                        <option value="kuwait">Kuwait</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="type-filter"><i class="fas fa-briefcase"></i> Type:</label>
+                    <select id="type-filter">
+                        <option value="all">All Types</option>
+                        <option value="domestic">Domestic</option>
+                        <option value="commercial">Commercial</option>
+                        <option value="construction">Construction</option>
+                        <option value="hospitality">Hospitality</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="skills-filter"><i class="fas fa-tools"></i> Skills:</label>
+                    <input type="text" id="skills-filter" placeholder="Enter skills...">
+                </div>
+                
+                <button class="filter-btn" id="filterBtn">Apply Filters</button>
+            </div>
+
+            <!-- Job Listings - now 3 cards -->
+            <div class="job-listings">
+                <!-- Job 1 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3>Housekeeper</h3>
+                        <span class="job-badge domestic">Domestic</span>
+                    </div>
+                    <div class="job-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Doha, Qatar</p>
+                        <p><i class="fas fa-money-bill-wave"></i> QAR 2,500 - 3,000/month</p>
+                        <p><i class="fas fa-calendar-alt"></i> Posted 3 days ago</p>
+                    </div>
+                    <div class="job-skills">
+                        <span>Cleaning</span>
+                        <span>Laundry</span>
+                        <span>Organization</span>
+                    </div>
+                    <button class="apply-btn job-apply-btn">Submit Application</button>
+                </div>
+
+                <!-- Job 2 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3>Construction Supervisor</h3>
+                        <span class="job-badge construction">Construction</span>
+                    </div>
+                    <div class="job-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
+                        <p><i class="fas fa-money-bill-wave"></i> AED 5,000 - 6,500/month</p>
+                        <p><i class="fas fa-calendar-alt"></i> Posted 1 week ago</p>
+                    </div>
+                    <div class="job-skills">
+                        <span>Project Management</span>
+                        <span>Safety Compliance</span>
+                        <span>Team Leadership</span>
+                    </div>
+                    <button class="apply-btn job-apply-btn">Submit Application</button>
+                </div>
+
+                <!-- Job 3 -->
+                <div class="job-card">
+                    <div class="job-header">
+                        <h3>Hotel Receptionist</h3>
+                        <span class="job-badge hospitality">Hospitality</span>
+                    </div>
+                    <div class="job-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Riyadh, Saudi Arabia</p>
+                        <p><i class="fas fa-money-bill-wave"></i> SAR 3,800 - 4,500/month</p>
+                        <p><i class="fas fa-calendar-alt"></i> Posted 2 days ago</p>
+                    </div>
+                    <div class="job-skills">
+                        <span>Customer Service</span>
+                        <span>English Speaking</span>
+                        <span>Reservation Systems</span>
+                    </div>
+                    <button class="apply-btn job-apply-btn">Submit Application</button>
+                </div>
+            </div>
+
+            <div class="view-all-jobs">
+                <button class="view-all-btn" id="viewAllJobsBtn">View All Job Opportunities</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENT ASSISTANCE SECTION - 5 CARDS WITH MODAL FORMS -->
+    <section class="client-assistance" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>For Individuals (Client Assistance)</h2>
+                <p>Are you seeking a domestic worker? Submit your application now.</p>
+            </div>
+
+            <div class="assistance-steps">
+                <!-- Card 1 - Service Request Form -->
+                <div class="step-box left-box">
+                    <div class="step-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Service Request Form</h3>
+                    <p>Complete our detailed form to specify your requirements for domestic help.</p>
+                    <button class="step-btn" data-step="1" data-title="Service Request Form">Start Application</button>
+                </div>
+
+                <!-- Card 2 - Contracting Process -->
+                <div class="step-box right-box">
+                    <div class="step-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Contracting Process</h3>
+                    <p>Our team will guide you through the legal contracting process.</p>
+                    <button class="step-btn" data-step="2" data-title="Contracting Process Inquiry">Learn More</button>
+                </div>
+
+                <!-- Card 3 - Completion Timeline -->
+                <div class="step-box left-box">
+                    <div class="step-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Completion Timeline</h3>
+                    <p>Understand the typical duration from application to placement.</p>
+                    <button class="step-btn" data-step="3" data-title="Timeline Inquiry">View Timelines</button>
+                </div>
+
+                <!-- Card 4 - Candidate Selection -->
+                <div class="step-box right-box">
+                    <div class="step-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Candidate Selection</h3>
+                    <p>Review pre-screened candidates and select the best match.</p>
+                    <button class="step-btn" data-step="4" data-title="Candidate Request">Browse Candidates</button>
+                </div>
+
+                <!-- Card 5 - Visa & Documentation -->
+                <div class="step-box left-box">
+                    <div class="step-icon">
+                        <i class="fas fa-passport"></i>
+                    </div>
+                    <h3>Visa & Documentation</h3>
+                    <p>We assist with visa processing and all necessary paperwork for your domestic worker.</p>
+                    <button class="step-btn" data-step="5" data-title="Visa Assistance Request">Visa Assistance</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Assistance Modal -->
+    <div class="modal-overlay" id="clientModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeClientModal">&times;</span>
+            <h3 id="clientModalTitle">Service Request Form</h3>
+            <form id="clientForm">
+                <div class="form-group">
+                    <input type="text" id="clientName" placeholder="Your Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="clientEmail" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="clientPhone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="clientMessage" placeholder="Your Message / Requirements" rows="4" required></textarea>
+                </div>
+                <input type="hidden" id="clientStep" value="">
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Get in Touch Section (info and chat side by side) -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p>We're here to help you with all your needs</p>
+            </div>
+
+            <div class="contact-info-chat">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h4>Contact Information</h4>
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Call Us</h4>
+                            <a href="tel:+1234567890">+123 456 7890</a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>WhatsApp</h4>
+                            <a href="https://wa.me/1234567890" class="whatsapp-link">
+                                <span>Chat on WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="info-content">
+                            <h4>Our Location</h4>
+                            <p>123 Business Street, Doha, Qatar</p>
+                        </div>
+                    </div>
+
+                    <!-- Map Container -->
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.178509744292!2d51.49042131548195!3d25.19783798389627!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534ffdce87f%3A0x44d931e9f2c43f9a!2sDoha%2C%20Qatar!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                        </iframe>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Live Chat Box -->
+                <div class="chat-box">
+                    <div class="chat-header">
+                        <h4>Live Chat</h4>
+                    </div>
+                    <div class="chat-messages">
+                        <div class="chat-message bot-message">
+                            Hello! How can we help you today?
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" placeholder="Type your message...">
+                        <button class="chat-send-btn">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Login / Dashboard</h2>
+                <p>Manage your account and track your orders</p>
+            </div>
+
+            <div class="dashboard-container">
+                <!-- Rotating Image -->
+                <div class="image-container">
+                    <img src="dashboard.jpg" alt="Dashboard Preview" class="rotating-image">
+                </div>
+
+                <!-- Dashboard Features - Now with 4 boxes -->
+                <div class="features-container">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <h3>Customer Portal</h3>
+                        <p>Monitor your order status and history in real-time</p>
+                        <button class="feature-btn">Customer Login</button>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Employer Portal</h3>
+                        <p>Revise and update employee information and documents</p>
+                        <button class="feature-btn">Employer Login</button>
+                    </div>
+
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Admin Portal</h3>
+                        <p>Oversee and manage the entire system and users</p>
+                        <button class="feature-btn">Admin Login</button>
+                    </div>
+                    
+                    <!-- New 4th Box -->
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analytics Portal</h3>
+                        <p>View reports and performance analytics</p>
+                        <button class="feature-btn">View Analytics</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section - Now with left-to-right columns and button modals -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1 -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Terms of Service</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-file-contract"></i> User Agreement</a></li>
+                        <li><a href="#"><i class="fas fa-gavel"></i> Legal Terms</a></li>
+                        <li><a href="#"><i class="fas fa-ban"></i> Prohibited Activities</a></li>
+                        <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Disclaimer</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2 -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Privacy Policy</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-database"></i> Data Collection</a></li>
+                        <li><a href="#"><i class="fas fa-shield-alt"></i> Data Protection</a></li>
+                        <li><a href="#"><i class="fas fa-cookie-bite"></i> Cookie Policy</a></li>
+                        <li><a href="#"><i class="fas fa-user-secret"></i> Your Rights</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Contractual Agreement</h3>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-handshake"></i> Service Contracts</a></li>
+                        <li><a href="#"><i class="fas fa-file-signature"></i> Signing Process</a></li>
+                        <li><a href="#"><i class="fas fa-undo-alt"></i> Cancellation Policy</a></li>
+                        <li><a href="#"><i class="fas fa-balance-scale"></i> Dispute Resolution</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div class="footer-column">
+                    <h3 class="footer-heading">Connect With Us</h3>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="footer-buttons">
+                        <button class="footer-btn contact-btn" id="contactUsBtn"><i class="fas fa-envelope"></i> Contact Us</button>
+                        <button class="footer-btn support-btn" id="supportBtn"><i class="fas fa-headset"></i> Support</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p class="copyright">© 2023 AL-RAWDAN. All Rights Reserved.</p>
+                <div class="legal-links">
+                    <a href="#">Accessibility</a>
+                    <a href="#">Sitemap</a>
+                    <a href="#">Careers</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer Modals -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeContactModal">&times;</span>
+            <h3>Contact Us</h3>
+            <form id="contactForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Your Message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="supportModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeSupportModal">&times;</span>
+            <h3>Support Request</h3>
+            <form id="supportForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Describe your issue" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Job Application Modal -->
+    <div class="modal-overlay" id="jobModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>Job Application</h3>
+            <form id="jobApplicationForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select Position</option>
+                        <option>Housekeeper</option>
+                        <option>Construction Supervisor</option>
+                        <option>Hotel Receptionist</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Cover Letter / Message" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="file" accept=".pdf,.doc,.docx">
+                </div>
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive translations object (unchanged, kept fully intact)
+        const translations = {
+            en: {
+                nav: ['Home', 'About', 'Services', 'Jobs', 'FAQ', 'Contact'],
+                logoTitle: 'AL-RAWDAN',
+                logoSlogan: 'AL-Rawdan Human Resources Development<br> Consulting Company',
+                heroTitle: 'Welcome to AL-RAWDAN',
+                heroSubtitle: 'Your trusted partner in human resources development and recruitment solutions.',
+                heroBtn1: 'Get Started',
+                heroBtn2: 'Learn More',
+                aboutTitle: 'About Our Company',
+                whoWeAre: 'Who We Are',
+                aboutP1: 'AL-RAWDAN is a leading recruitment agency specializing in connecting employers with skilled professionals across domestic and commercial sectors. Founded in 2010, we\'ve grown to become a trusted partner for both job seekers and employers throughout the region.',
+                aboutP2: 'Our team of experienced recruiters understands the unique challenges of today\'s job market and works tirelessly to match the right talent with the right opportunities.',
+                aboutP3: 'With offices in multiple countries and a network of thousands of qualified professionals, we\'re equipped to handle staffing needs of any scale.',
+                missionTitle: 'Our Mission',
+                missionP1: 'To bridge the gap between talent and opportunity by providing exceptional recruitment services that prioritize quality, integrity, and cultural fit. We aim to transform the employment landscape through innovative solutions and personalized service.',
+                missionP2: 'Every placement we make is carefully vetted to ensure long-term success for both employers and employees.',
+                visionTitle: 'Our Vision',
+                visionP1: 'To become the most trusted workforce solutions provider in the region, recognized for our commitment to excellence and our positive impact on communities through meaningful employment opportunities.',
+                visionP2: 'We envision a future where every individual has access to fulfilling work and every employer can find the perfect candidate.',
+                whyTitle: 'Why Choose AL-RAWDAN?',
+                whyP: 'Our clients and candidates choose us because we deliver results with a human touch. Here\'s what sets us apart:',
+                reason1: 'Extensive Network',
+                reason1P: 'Access to thousands of pre-screened candidates across multiple industries and skill levels.',
+                reason2: 'Cultural Expertise',
+                reason2P: 'Deep understanding of local and international workplace cultures for perfect matches.',
+                reason3: 'Quality Assurance',
+                reason3P: 'Rigorous vetting process ensures only the most qualified candidates are presented.',
+                reason4: 'Ongoing Support',
+                reason4P: 'Continuous assistance even after placement to ensure long-term satisfaction.',
+                certTitle: 'Our Accreditations',
+                cert1: 'Ministry of Labor Approved',
+                cert2: 'International Recruitment Standards',
+                cert3: 'Quality Management Certified',
+                cert4: 'Ethical Recruitment Charter',
+                teamTitle: 'Meet Our Leadership Team',
+                team1Name: 'Ahmed Al-Mansoori',
+                team1Role: 'Founder & CEO',
+                team2Name: 'Fatima Al-Hashimi',
+                team2Role: 'Director of Operations',
+                team3Name: 'Raj Patel',
+                team3Role: 'Head of Recruitment',
+                team4Name: 'Maria Gonzalez',
+                team4Role: 'Training Director',
+                offeringsTitle: 'Our Offerings',
+                offering1Title: '1. Workforce Recruitment',
+                offering1Item1: 'Employment in the domestic sector (housekeepers, chauffeurs, caregivers, etc.)',
+                offering1Item2: 'Recruitment for the commercial sector (businesses, restaurants, construction…)',
+                offering2Title: '2. Workforce Development',
+                offering2Item1: 'Linguistic and cultural training',
+                offering2Item2: 'Vocational training (sanitation, culinary arts, driving…)',
+                offering2Item3: 'Pre-travel preparation for workers',
+                jobsTitle: 'Job Opportunities',
+                jobsSub: 'Explore our latest job openings and find your perfect match',
+                jobFilterCountry: 'Country:',
+                jobFilterType: 'Type:',
+                jobFilterSkills: 'Skills:',
+                jobFilterBtn: 'Apply Filters',
+                job1Title: 'Housekeeper',
+                job1Loc: 'Doha, Qatar',
+                job1Salary: 'QAR 2,500 - 3,000/month',
+                job1Posted: 'Posted 3 days ago',
+                job1Skill1: 'Cleaning',
+                job1Skill2: 'Laundry',
+                job1Skill3: 'Organization',
+                job2Title: 'Construction Supervisor',
+                job2Loc: 'Dubai, UAE',
+                job2Salary: 'AED 5,000 - 6,500/month',
+                job2Posted: 'Posted 1 week ago',
+                job2Skill1: 'Project Management',
+                job2Skill2: 'Safety Compliance',
+                job2Skill3: 'Team Leadership',
+                job3Title: 'Hotel Receptionist',
+                job3Loc: 'Riyadh, Saudi Arabia',
+                job3Salary: 'SAR 3,800 - 4,500/month',
+                job3Posted: 'Posted 2 days ago',
+                job3Skill1: 'Customer Service',
+                job3Skill2: 'English Speaking',
+                job3Skill3: 'Reservation Systems',
+                viewAllBtn: 'View All Job Opportunities',
+                clientTitle: 'For Individuals (Client Assistance)',
+                clientSub: 'Are you seeking a domestic worker? Submit your application now.',
+                step1Title: 'Service Request Form',
+                step1P: 'Complete our detailed form to specify your requirements for domestic help.',
+                step1Btn: 'Start Application',
+                step2Title: 'Contracting Process',
+                step2P: 'Our team will guide you through the legal contracting process.',
+                step2Btn: 'Learn More',
+                step3Title: 'Completion Timeline',
+                step3P: 'Understand the typical duration from application to placement.',
+                step3Btn: 'View Timelines',
+                step4Title: 'Candidate Selection',
+                step4P: 'Review pre-screened candidates and select the best match.',
+                step4Btn: 'Browse Candidates',
+                step5Title: 'Visa & Documentation',
+                step5P: 'We assist with visa processing and all necessary paperwork for your domestic worker.',
+                step5Btn: 'Visa Assistance',
+                contactTitle: 'Get in Touch',
+                contactSub: 'We\'re here to help you with all your needs',
+                contactInfoTitle: 'Contact Information',
+                callUs: 'Call Us',
+                whatsapp: 'WhatsApp',
+                location: 'Our Location',
+                address: '123 Business Street, Doha, Qatar',
+                chatHeader: 'Live Chat',
+                chatPlaceholder: 'Type your message...',
+                chatSend: 'Send',
+                dashboardTitle: 'Login / Dashboard',
+                dashboardSub: 'Manage your account and track your orders',
+                feature1Title: 'Customer Portal',
+                feature1P: 'Monitor your order status and history in real-time',
+                feature1Btn: 'Customer Login',
+                feature2Title: 'Employer Portal',
+                feature2P: 'Revise and update employee information and documents',
+                feature2Btn: 'Employer Login',
+                feature3Title: 'Admin Portal',
+                feature3P: 'Oversee and manage the entire system and users',
+                feature3Btn: 'Admin Login',
+                feature4Title: 'Analytics Portal',
+                feature4P: 'View reports and performance analytics',
+                feature4Btn: 'View Analytics',
+                footerCol1Title: 'Terms of Service',
+                footerCol1Link1: 'User Agreement',
+                footerCol1Link2: 'Legal Terms',
+                footerCol1Link3: 'Prohibited Activities',
+                footerCol1Link4: 'Disclaimer',
+                footerCol2Title: 'Privacy Policy',
+                footerCol2Link1: 'Data Collection',
+                footerCol2Link2: 'Data Protection',
+                footerCol2Link3: 'Cookie Policy',
+                footerCol2Link4: 'Your Rights',
+                footerCol3Title: 'Contractual Agreement',
+                footerCol3Link1: 'Service Contracts',
+                footerCol3Link2: 'Signing Process',
+                footerCol3Link3: 'Cancellation Policy',
+                footerCol3Link4: 'Dispute Resolution',
+                footerCol4Title: 'Connect With Us',
+                contactUsBtn: 'Contact Us',
+                supportBtn: 'Support',
+                copyright: '© 2023 AL-RAWDAN. All Rights Reserved.',
+                legal1: 'Accessibility',
+                legal2: 'Sitemap',
+                legal3: 'Careers',
+                jobApplyBtn: 'Submit Application',
+                jobModalTitle: 'Job Application',
+                jobModalName: 'Full Name',
+                jobModalEmail: 'Email Address',
+                jobModalPhone: 'Phone Number',
+                jobModalPosition: 'Select Position',
+                jobModalCover: 'Cover Letter / Message',
+                jobModalFile: 'Upload CV',
+                jobModalSubmit: 'Submit Application',
+                clientModalName: 'Your Full Name',
+                clientModalEmail: 'Your Email',
+                clientModalPhone: 'Phone Number',
+                clientModalMsg: 'Your Message / Requirements',
+                clientModalSubmit: 'Submit Request',
+                contactModalTitle: 'Contact Us',
+                contactModalName: 'Your Name',
+                contactModalEmail: 'Your Email',
+                contactModalPhone: 'Phone Number',
+                contactModalMsg: 'Your Message',
+                contactModalSubmit: 'Send Message',
+                supportModalTitle: 'Support Request',
+                supportModalName: 'Your Name',
+                supportModalEmail: 'Your Email',
+                supportModalPhone: 'Phone Number',
+                supportModalMsg: 'Describe your issue',
+                supportModalSubmit: 'Submit Request'
+            },
+            ur: {
+                nav: ['ہوم', 'ہمارے بارے میں', 'خدمات', 'ملازمتیں', 'سوالات', 'رابطہ'],
+                logoTitle: 'الراودان',
+                logoSlogan: 'الراودان برائے انسانی وسائل کی ترقی<br> مشاورتی کمپنی',
+                heroTitle: 'الراودان میں خوش آمدید',
+                heroSubtitle: 'انسانی وسائل کی ترقی اور بھرتی کے حل میں آپ کا قابل اعتماد پارٹنر۔',
+                heroBtn1: 'شروع کریں',
+                heroBtn2: 'مزید جانیں',
+                aboutTitle: 'ہماری کمپنی کے بارے میں',
+                whoWeAre: 'ہم کون ہیں',
+                aboutP1: 'الراودان ایک معروف بھرتی ایجنسی ہے جو آجروں کو گھریلو اور تجارتی شعبوں میں ہنر مند پیشہ ور افراد سے جوڑنے میں مہارت رکھتی ہے۔ 2010 میں قائم ہونے والی، ہم خطے بھر میں نوکری کے متلاشیوں اور آجروں دونوں کے لیے ایک قابل اعتماد پارٹنر بن گئے ہیں۔',
+                aboutP2: 'ہماری تجربہ کار بھرتی کرنے والوں کی ٹیم آج کی ملازمت کی مارکیٹ کے منفرد چیلنجوں کو سمجھتی ہے اور صحیح ہنر کو صحیح مواقع سے ملانے کے لیے انتھک محنت کرتی ہے۔',
+                aboutP3: 'متعدد ممالک میں دفاتر اور ہزاروں قابل پیشہ ور افراد کے نیٹ ورک کے ساتھ، ہم کسی بھی پیمانے کی اسٹافنگ کی ضروریات کو پورا کرنے کے لیے تیار ہیں۔',
+                missionTitle: 'ہمارا مشن',
+                missionP1: 'غیر معمولی بھرتی کی خدمات فراہم کرکے ٹیلنٹ اور مواقع کے درمیان فرق کو ختم کرنا جو معیار، دیانت اور ثقافتی مطابقت کو ترجیح دیتی ہیں۔ ہمارا مقصد جدید حل اور ذاتی نوعیت کی خدمات کے ذریعے روزگار کے منظر نامے کو تبدیل کرنا ہے۔',
+                missionP2: 'ہماری کی گئی ہر تقرری کو آجروں اور ملازمین دونوں کے لیے طویل مدتی کامیابی کو یقینی بنانے کے لیے احتیاط سے جانچا جاتا ہے۔',
+                visionTitle: 'ہمارا وژن',
+                visionP1: 'خطے میں سب سے زیادہ قابل اعتبار ورک فورس سلوشنز فراہم کرنے والا بننا، جو بامعنی روزگار کے مواقع کے ذریعے معیار اور کمیونٹیز پر ہمارے مثبت اثرات کے لیے پہچانا جاتا ہے۔',
+                visionP2: 'ہم ایک ایسے مستقبل کا تصور کرتے ہیں جہاں ہر فرد کو اطمینان بخش کام تک رسائی حاصل ہو اور ہر آجر کامل امیدوار تلاش کر سکے۔',
+                whyTitle: 'الراودان کا انتخاب کیوں کریں؟',
+                whyP: 'ہمارے کلائنٹس اور امیدوار ہمیں اس لیے منتخب کرتے ہیں کیونکہ ہم انسانی رابطے کے ساتھ نتائج فراہم کرتے ہیں۔ یہ ہے جو ہمیں الگ کرتا ہے:',
+                reason1: 'وسیع نیٹ ورک',
+                reason1P: 'متعدد صنعتوں اور مہارت کی سطحوں پر ہزاروں پری اسکرینڈ امیدواروں تک رسائی۔',
+                reason2: 'ثقافتی مہارت',
+                reason2P: 'کامل میچوں کے لیے مقامی اور بین الاقوامی کام کی جگہ کی ثقافتوں کی گہری سمجھ۔',
+                reason3: 'کوالٹی اشورینس',
+                reason3P: 'سخت جانچ کا عمل یقینی بناتا ہے کہ صرف انتہائی قابل امیدوار پیش کیے جائیں۔',
+                reason4: 'جاری تعاون',
+                reason4P: 'طویل مدتی اطمینان کو یقینی بنانے کے لیے تقرری کے بعد بھی مسلسل مدد۔',
+                certTitle: 'ہماری سندیں',
+                cert1: 'وزارت محنت سے منظور شدہ',
+                cert2: 'بین الاقوامی بھرتی کے معیارات',
+                cert3: 'کوالٹی مینجمنٹ سرٹیفائیڈ',
+                cert4: 'اخلاقی بھرتی کا چارٹر',
+                teamTitle: 'ہماری قیادت ٹیم سے ملیں',
+                team1Name: 'احمد المنصوری',
+                team1Role: 'بانی اور سی ای او',
+                team2Name: 'فاطمہ الحاشمی',
+                team2Role: 'ڈائریکٹر آپریشنز',
+                team3Name: 'راج پٹیل',
+                team3Role: 'ہیڈ آف ریکروٹمنٹ',
+                team4Name: 'ماریہ گونزالیز',
+                team4Role: 'ٹریننگ ڈائریکٹر',
+                offeringsTitle: 'ہماری پیشکشیں',
+                offering1Title: '1. ورک فورس ریکروٹمنٹ',
+                offering1Item1: 'گھریلو شعبے میں ملازمت (گھریلو ملازم، ڈرائیور، نگہداشت کرنے والے، وغیرہ)',
+                offering1Item2: 'تجارتی شعبے کے لیے بھرتی (کاروبار، ریستوران، تعمیرات…)',
+                offering2Title: '2. ورک فورس ڈیولپمنٹ',
+                offering2Item1: 'زبانی اور ثقافتی تربیت',
+                offering2Item2: 'پیشہ ورانہ تربیت (صفائی ستھرائی، کھانا پکانے کے فنون، ڈرائیونگ…)',
+                offering2Item3: 'کارکنوں کے لیے سفر سے پہلے کی تیاری',
+                jobsTitle: 'ملازمت کے مواقع',
+                jobsSub: 'ہمارے تازہ ترین ملازمت کے مواقع دریافت کریں اور اپنا بہترین میچ تلاش کریں',
+                jobFilterCountry: 'ملک:',
+                jobFilterType: 'قسم:',
+                jobFilterSkills: 'مہارتیں:',
+                jobFilterBtn: 'فلٹر لگائیں',
+                job1Title: 'گھریلو ملازم',
+                job1Loc: 'دوحہ، قطر',
+                job1Salary: 'QAR 2,500 - 3,000/ماہ',
+                job1Posted: '3 دن پہلے پوسٹ کیا گیا',
+                job1Skill1: 'صفائی',
+                job1Skill2: 'لانڈری',
+                job1Skill3: 'تنظیم',
+                job2Title: 'تعمیراتی نگران',
+                job2Loc: 'دبئی، یو اے ای',
+                job2Salary: 'AED 5,000 - 6,500/ماہ',
+                job2Posted: '1 ہفتہ پہلے پوسٹ کیا گیا',
+                job2Skill1: 'پراجیکٹ مینجمنٹ',
+                job2Skill2: 'سیفٹی کمپلائنس',
+                job2Skill3: 'ٹیم لیڈرشپ',
+                job3Title: 'ہوٹل ریسپشنسٹ',
+                job3Loc: 'ریاض، سعودی عرب',
+                job3Salary: 'SAR 3,800 - 4,500/ماہ',
+                job3Posted: '2 دن پہلے پوسٹ کیا گیا',
+                job3Skill1: 'کسٹمر سروس',
+                job3Skill2: 'انگریزی بولنا',
+                job3Skill3: 'ریزرویشن سسٹم',
+                viewAllBtn: 'تمام ملازمت کے مواقع دیکھیں',
+                clientTitle: 'انفرادی کلائنٹس کے لیے',
+                clientSub: 'کیا آپ گھریلو کارکن کی تلاش میں ہیں؟ ابھی اپنی درخواست جمع کروائیں۔',
+                step1Title: 'سروس ریکوسٹ فارم',
+                step1P: 'گھریلو مدد کے لیے اپنی ضروریات بتانے کے لیے ہمارا تفصیلی فارم مکمل کریں۔',
+                step1Btn: 'درخواست شروع کریں',
+                step2Title: 'معاہدہ کا عمل',
+                step2P: 'ہماری ٹیم قانونی معاہدے کے عمل میں آپ کی رہنمائی کرے گی۔',
+                step2Btn: 'مزید جانیں',
+                step3Title: 'تکمیل کا ٹائم لائن',
+                step3P: 'درخواست سے تقرری تک عام مدت کو سمجھیں۔',
+                step3Btn: 'ٹائم لائن دیکھیں',
+                step4Title: 'امیدوار کا انتخاب',
+                step4P: 'پری اسکرینڈ امیدواروں کا جائزہ لیں اور بہترین میچ منتخب کریں۔',
+                step4Btn: 'امیدوار براؤز کریں',
+                step5Title: 'وِزا اور دستاویزات',
+                step5P: 'ہم آپ کے گھریلو کارکن کے لیے ویزا پروسیسنگ اور تمام ضروری کاغذی کارروائی میں مدد کرتے ہیں۔',
+                step5Btn: 'ویزا اسسٹنس',
+                contactTitle: 'رابطہ کریں',
+                contactSub: 'ہم آپ کی تمام ضروریات میں مدد کے لیے یہاں ہیں',
+                contactInfoTitle: 'رابطہ کی معلومات',
+                callUs: 'ہمیں کال کریں',
+                whatsapp: 'واٹس ایپ',
+                location: 'ہمارا مقام',
+                address: '123 بزنس سٹریٹ، دوحہ، قطر',
+                chatHeader: 'لائیو چیٹ',
+                chatPlaceholder: 'اپنا پیغام ٹائپ کریں...',
+                chatSend: 'بھیجیں',
+                dashboardTitle: 'لاگ ان / ڈیش بورڈ',
+                dashboardSub: 'اپنا اکاؤنٹ مینیج کریں اور اپنے آرڈرز ٹریک کریں',
+                feature1Title: 'کسٹمر پورٹل',
+                feature1P: 'ریئل ٹائم میں اپنے آرڈر کی حیثیت اور تاریخ مانیٹر کریں',
+                feature1Btn: 'کسٹمر لاگ ان',
+                feature2Title: 'آجر پورٹل',
+                feature2P: 'ملازمین کی معلومات اور دستاویزات پر نظر ثانی اور اپ ڈیٹ کریں',
+                feature2Btn: 'آجر لاگ ان',
+                feature3Title: 'ایڈمن پورٹل',
+                feature3P: 'پورے سسٹم اور صارفین کی نگرانی اور انتظام کریں',
+                feature3Btn: 'ایڈمن لاگ ان',
+                feature4Title: 'اینالیٹکس پورٹل',
+                feature4P: 'رپورٹس اور کارکردگی کے تجزیات دیکھیں',
+                feature4Btn: 'تجزیات دیکھیں',
+                footerCol1Title: 'خدمات کی شرائط',
+                footerCol1Link1: 'صارف کا معاہدہ',
+                footerCol1Link2: 'قانونی شرائط',
+                footerCol1Link3: 'ممنوعہ سرگرمیاں',
+                footerCol1Link4: 'دستبرداری',
+                footerCol2Title: 'پرائیویسی پالیسی',
+                footerCol2Link1: 'ڈیٹا اکٹھا کرنا',
+                footerCol2Link2: 'ڈیٹا پروٹیکشن',
+                footerCol2Link3: 'کوکی پالیسی',
+                footerCol2Link4: 'آپ کے حقوق',
+                footerCol3Title: 'معاہدہ',
+                footerCol3Link1: 'سروس کنٹریکٹس',
+                footerCol3Link2: 'دستخط کرنے کا عمل',
+                footerCol3Link3: 'منسوخی کی پالیسی',
+                footerCol3Link4: 'تنازعہ کا حل',
+                footerCol4Title: 'ہم سے جڑیں',
+                contactUsBtn: 'ہم سے رابطہ کریں',
+                supportBtn: 'سپورٹ',
+                copyright: '© 2023 الراودان. جملہ حقوق محفوظ ہیں۔',
+                legal1: 'رسائی',
+                legal2: 'سائٹ میپ',
+                legal3: 'کیرئیرز',
+                jobApplyBtn: 'درخواست جمع کروائیں',
+                jobModalTitle: 'نوکری کی درخواست',
+                jobModalName: 'پورا نام',
+                jobModalEmail: 'ای میل ایڈریس',
+                jobModalPhone: 'فون نمبر',
+                jobModalPosition: 'پوزیشن منتخب کریں',
+                jobModalCover: 'کور لیٹر / پیغام',
+                jobModalFile: 'سی وی اپ لوڈ کریں',
+                jobModalSubmit: 'درخواست جمع کروائیں',
+                clientModalName: 'آپ کا پورا نام',
+                clientModalEmail: 'آپ کا ای میل',
+                clientModalPhone: 'فون نمبر',
+                clientModalMsg: 'آپ کا پیغام / ضروریات',
+                clientModalSubmit: 'درخواست جمع کروائیں',
+                contactModalTitle: 'ہم سے رابطہ کریں',
+                contactModalName: 'آپ کا نام',
+                contactModalEmail: 'آپ کا ای میل',
+                contactModalPhone: 'فون نمبر',
+                contactModalMsg: 'آپ کا پیغام',
+                contactModalSubmit: 'پیغام بھیجیں',
+                supportModalTitle: 'سپورٹ کی درخواست',
+                supportModalName: 'آپ کا نام',
+                supportModalEmail: 'آپ کا ای میل',
+                supportModalPhone: 'فون نمبر',
+                supportModalMsg: 'اپنے مسئلے کی وضاحت کریں',
+                supportModalSubmit: 'درخواست جمع کروائیں'
+            },
+            ar: {
+                nav: ['الرئيسية', 'معلومات عنا', 'خدمات', 'وظائف', 'أسئلة', 'اتصل بنا'],
+                logoTitle: 'الروضان',
+                logoSlogan: 'شركة الروضان للاستشارات<br> وتنمية الموارد البشرية',
+                heroTitle: 'مرحبًا بكم في الروضان',
+                heroSubtitle: 'شريكك الموثوق في تطوير الموارد البشرية وحلول التوظيف.',
+                heroBtn1: 'ابدأ',
+                heroBtn2: 'اعرف المزيد',
+                aboutTitle: 'حول شركتنا',
+                whoWeAre: 'من نحن',
+                aboutP1: 'الروضان هي وكالة توظيف رائدة متخصصة في ربط أصحاب العمل بالمهنيين المهرة في القطاعين المحلي والتجاري. تأسست في عام 2010، نمونا لنصبح شريكًا موثوقًا لكل من الباحثين عن عمل وأصحاب العمل في جميع أنحاء المنطقة.',
+                aboutP2: 'فريقنا من مسؤولي التوظيف ذوي الخبرة يفهم التحديات الفريدة لسوق العمل اليوم ويعمل بلا كلل لمطابقة الموهبة المناسبة مع الفرص المناسبة.',
+                aboutP3: 'مع مكاتب في عدة دول وشبكة من آلاف المهنيين المؤهلين، نحن مجهزون للتعامل مع احتياجات التوظيف بأي حجم.',
+                missionTitle: 'مهمتنا',
+                missionP1: 'سد الفجوة بين الموهبة والفرصة من خلال تقديم خدمات توظيف استثنائية تعطي الأولوية للجودة والنزاهة والملاءمة الثقافية. نهدف إلى تحويل مشهد التوظيف من خلال حلول مبتكرة وخدمة شخصية.',
+                missionP2: 'كل توظيف نقوم به يتم فحصه بعناية لضمان النجاح طويل الأمد لكل من أصحاب العمل والموظفين.',
+                visionTitle: 'رؤيتنا',
+                visionP1: 'أن نصبح مزود حلول القوى العاملة الأكثر ثقة في المنطقة، المعترف به لالتزامنا بالتميز وتأثيرنا الإيجابي على المجتمعات من خلال فرص العمل الهادفة.',
+                visionP2: 'نتصور مستقبلًا حيث يمكن لكل فرد الوصول إلى عمل مُرضٍ ويمكن لكل صاحب عمل العثور على المرشح المثالي.',
+                whyTitle: 'لماذا تختار الروضان؟',
+                whyP: 'يختارنا عملاؤنا والمرشحون لأننا نقدم النتائج بلمسة إنسانية. إليك ما يميزنا:',
+                reason1: 'شبكة واسعة',
+                reason1P: 'الوصول إلى آلاف المرشحين الذين تم فحصهم مسبقًا عبر العديد من الصناعات ومستويات المهارة.',
+                reason2: 'خبرة ثقافية',
+                reason2P: 'فهم عميق لثقافات مكان العمل المحلية والدولية للتطابق المثالي.',
+                reason3: 'ضمان الجودة',
+                reason3P: 'عملية فحص صارمة تضمان فقط تقديم المرشحين الأكثر تأهيلاً.',
+                reason4: 'دعم مستمر',
+                reason4P: 'مساعدة مستمرة حتى بعد التوظيف لضمان الرضا طويل الأمد.',
+                certTitle: 'اعتماداتنا',
+                cert1: 'معتمد من وزارة العمل',
+                cert2: 'معايير التوظيف الدولية',
+                cert3: 'معتمد في إدارة الجودة',
+                cert4: 'ميثاق التوظيف الأخلاقي',
+                teamTitle: 'قابل فريق القيادة لدينا',
+                team1Name: 'أحمد المنصوري',
+                team1Role: 'المؤسس والرئيس التنفيذي',
+                team2Name: 'فاطمة الهاشمي',
+                team2Role: 'مدير العمليات',
+                team3Name: 'راج باتيل',
+                team3Role: 'رئيس التوظيف',
+                team4Name: 'ماريا غونزاليز',
+                team4Role: 'مدير التدريب',
+                offeringsTitle: 'عروضنا',
+                offering1Title: '1. توظيف القوى العاملة',
+                offering1Item1: 'التوظيف في القطاع المنزلي (مدبرات منزل، سائقون، مقدمي رعاية، إلخ)',
+                offering1Item2: 'التوظيف للقطاع التجاري (الشركات، المطاعم، البناء…)',
+                offering2Title: '2. تطوير القوى العاملة',
+                offering2Item1: 'التدريب اللغوي والثقافي',
+                offering2Item2: 'التدريب المهني (الصرف الصحي، فنون الطهي، القيادة…)',
+                offering2Item3: 'التحضير قبل السفر للعمال',
+                jobsTitle: 'فرص عمل',
+                jobsSub: 'استكشف أحدث فرص العمل لدينا وابحث عن تطابقك المثالي',
+                jobFilterCountry: 'البلد:',
+                jobFilterType: 'النوع:',
+                jobFilterSkills: 'المهارات:',
+                jobFilterBtn: 'تطبيق المرشحات',
+                job1Title: 'مدبرة منزل',
+                job1Loc: 'الدوحة، قطر',
+                job1Salary: 'QAR 2,500 - 3,000/شهر',
+                job1Posted: 'نشر منذ 3 أيام',
+                job1Skill1: 'تنظيف',
+                job1Skill2: 'غسيل',
+                job1Skill3: 'تنظيم',
+                job2Title: 'مشرف بناء',
+                job2Loc: 'دبي، الإمارات',
+                job2Salary: 'AED 5,000 - 6,500/شهر',
+                job2Posted: 'نشر منذ أسبوع',
+                job2Skill1: 'إدارة المشاريع',
+                job2Skill2: 'الامتثال للسلامة',
+                job2Skill3: 'قيادة الفريق',
+                job3Title: 'موظف استقبال في فندق',
+                job3Loc: 'الرياض، السعودية',
+                job3Salary: 'SAR 3,800 - 4,500/شهر',
+                job3Posted: 'نشر منذ يومين',
+                job3Skill1: 'خدمة العملاء',
+                job3Skill2: 'التحدث بالإنجليزية',
+                job3Skill3: 'أنظمة الحجز',
+                viewAllBtn: 'عرض جميع فرص العمل',
+                clientTitle: 'للأفراد (مساعدة العملاء)',
+                clientSub: 'هل تبحث عن عامل منزلي؟ قدم طلبك الآن.',
+                step1Title: 'نموذج طلب الخدمة',
+                step1P: 'أكمل نموذجنا التفصيلي لتحديد متطلباتك للمساعدة المنزلية.',
+                step1Btn: 'ابدأ الطلب',
+                step2Title: 'عملية التعاقد',
+                step2P: 'سيقوم فريقنا بإرشادك خلال عملية التعاقد القانوني.',
+                step2Btn: 'اعرف المزيد',
+                step3Title: 'الجدول الزمني للإنجاز',
+                step3P: 'افهم المدة النموذجية من التقديم إلى التوظيف.',
+                step3Btn: 'عرض الجداول الزمنية',
+                step4Title: 'اختيار المرشح',
+                step4P: 'راجع المرشحين الذين تم فحصهم مسبقًا واختر أفضل تطابق.',
+                step4Btn: 'تصفح المرشحين',
+                step5Title: 'التأشيرة والوثائق',
+                step5P: 'نحن نساعد في معالجة التأشيرة وجميع الأوراق اللازمة لعامل منزلك.',
+                step5Btn: 'مساعدة التأشيرة',
+                contactTitle: 'اتصل بنا',
+                contactSub: 'نحن هنا لمساعدتك في جميع احتياجاتك',
+                contactInfoTitle: 'معلومات الاتصال',
+                callUs: 'اتصل بنا',
+                whatsapp: 'واتساب',
+                location: 'موقعنا',
+                address: '123 شارع الأعمال، الدوحة، قطر',
+                chatHeader: 'محادثة مباشرة',
+                chatPlaceholder: 'اكتب رسالتك...',
+                chatSend: 'إرسال',
+                dashboardTitle: 'تسجيل الدخول / لوحة التحكم',
+                dashboardSub: 'إدارة حسابك وتتبع طلباتك',
+                feature1Title: 'بوابة العميل',
+                feature1P: 'راقب حالة طلبك وسجلّاته في الوقت الفعلي',
+                feature1Btn: 'تسجيل دخول العميل',
+                feature2Title: 'بوابة صاحب العمل',
+                feature2P: 'مراجعة وتحديث معلومات ووثائق الموظفين',
+                feature2Btn: 'تسجيل دخول صاحب العمل',
+                feature3Title: 'بوابة المشرف',
+                feature3P: 'الإشراف على النظام بأكمله والمستخدمين وإدارته',
+                feature3Btn: 'تسجيل دخول المشرف',
+                feature4Title: 'بوابة التحليلات',
+                feature4P: 'عرض التقارير وتحليلات الأداء',
+                feature4Btn: 'عرض التحليلات',
+                footerCol1Title: 'شروط الخدمة',
+                footerCol1Link1: 'اتفاقية المستخدم',
+                footerCol1Link2: 'الشروط القانونية',
+                footerCol1Link3: 'الأنشطة المحظورة',
+                footerCol1Link4: 'إخلاء المسؤولية',
+                footerCol2Title: 'سياسة الخصوصية',
+                footerCol2Link1: 'جمع البيانات',
+                footerCol2Link2: 'حماية البيانات',
+                footerCol2Link3: 'سياسة ملفات تعريف الارتباط',
+                footerCol2Link4: 'حقوقك',
+                footerCol3Title: 'الاتفاقية التعاقدية',
+                footerCol3Link1: 'عقود الخدمة',
+                footerCol3Link2: 'عملية التوقيع',
+                footerCol3Link3: 'سياسة الإلغاء',
+                footerCol3Link4: 'تسوية النزاعات',
+                footerCol4Title: 'تواصل معنا',
+                contactUsBtn: 'اتصل بنا',
+                supportBtn: 'الدعم',
+                copyright: '© 2023 الروضان. جميع الحقوق محفوظة.',
+                legal1: 'إمكانية الوصول',
+                legal2: 'خريطة الموقع',
+                legal3: 'وظائف',
+                jobApplyBtn: 'تقديم الطلب',
+                jobModalTitle: 'طلب وظيفة',
+                jobModalName: 'الاسم الكامل',
+                jobModalEmail: 'البريد الإلكتروني',
+                jobModalPhone: 'رقم الهاتف',
+                jobModalPosition: 'اختر المنصب',
+                jobModalCover: 'رسالة تغطية / رسالة',
+                jobModalFile: 'رفع السيرة الذاتية',
+                jobModalSubmit: 'تقديم الطلب',
+                clientModalName: 'اسمك الكامل',
+                clientModalEmail: 'بريدك الإلكتروني',
+                clientModalPhone: 'رقم الهاتف',
+                clientModalMsg: 'رسالتك / متطلباتك',
+                clientModalSubmit: 'تقديم الطلب',
+                contactModalTitle: 'اتصل بنا',
+                contactModalName: 'اسمك',
+                contactModalEmail: 'بريدك الإلكتروني',
+                contactModalPhone: 'رقم الهاتف',
+                contactModalMsg: 'رسالتك',
+                contactModalSubmit: 'إرسال الرسالة',
+                supportModalTitle: 'طلب الدعم',
+                supportModalName: 'اسمك',
+                supportModalEmail: 'بريدك الإلكتروني',
+                supportModalPhone: 'رقم الهاتف',
+                supportModalMsg: 'صف مشكلتك',
+                supportModalSubmit: 'تقديم الطلب'
+            },
+            qa: { // Qatari variant - similar to Arabic with slight adjustments
+                nav: ['البيت', 'معلومات', 'خدمات', 'وظائف', 'أسئلة', 'اتصال'],
+                logoTitle: 'الروضان',
+                logoSlogan: 'شركة الروضان للاستشارات<br> وتنمية الموارد البشرية',
+                heroTitle: 'مرحبا بكم في الروضان',
+                heroSubtitle: 'شريككم الموثوق في تطوير الموارد البشرية وحلول التوظيف.',
+                heroBtn1: 'ابدأ',
+                heroBtn2: 'اعرف المزيد',
+                aboutTitle: 'حول شركتنا',
+                whoWeAre: 'من نحن',
+                aboutP1: 'الروضان هي وكالة توظيف رائدة متخصصة في ربط أصحاب العمل بالمهنيين المهرة في القطاعين المحلي والتجاري. تأسست في عام 2010، نمونا لنصبح شريكًا موثوقًا لكل من الباحثين عن عمل وأصحاب العمل في جميع أنحاء المنطقة.',
+                aboutP2: 'فريقنا من مسؤولي التوظيف ذوي الخبرة يفهم التحديات الفريدة لسوق العمل اليوم ويعمل بلا كلل لمطابقة الموهبة المناسبة مع الفرص المناسبة.',
+                aboutP3: 'مع مكاتب في عدة دول وشبكة من آلاف المهنيين المؤهلين، نحن مجهزون للتعامل مع احتياجات التوظيف بأي حجم.',
+                missionTitle: 'مهمتنا',
+                missionP1: 'سد الفجوة بين الموهبة والفرصة من خلال تقديم خدمات توظيف استثنائية تعطي الأولوية للجودة والنزاهة والملاءمة الثقافية. نهدف إلى تحويل مشهد التوظيف من خلال حلول مبتكرة وخدمة شخصية.',
+                missionP2: 'كل توظيف نقوم به يتم فحصه بعناية لضمان النجاح طويل الأمد لكل من أصحاب العمل والموظفين.',
+                visionTitle: 'رؤيتنا',
+                visionP1: 'أن نصبح مزود حلول القوى العاملة الأكثر ثقة في المنطقة، المعترف به لالتزامنا بالتميز وتأثيرنا الإيجابي على المجتمعات من خلال فرص العمل الهادفة.',
+                visionP2: 'نتصور مستقبلًا حيث يمكن لكل فرد الوصول إلى عمل مُرضٍ ويمكن لكل صاحب عمل العثور على المرشح المثالي.',
+                whyTitle: 'لماذا تختار الروضان؟',
+                whyP: 'يختارنا عملاؤنا والمرشحون لأننا نقدم النتائج بلمسة إنسانية. إليك ما يميزنا:',
+                reason1: 'شبكة واسعة',
+                reason1P: 'الوصول إلى آلاف المرشحين الذين تم فحصهم مسبقًا عبر العديد من الصناعات ومستويات المهارة.',
+                reason2: 'خبرة ثقافية',
+                reason2P: 'فهم عميق لثقافات مكان العمل المحلية والدولية للتطابق المثالي.',
+                reason3: 'ضمان الجودة',
+                reason3P: 'عملية فحص صارمة تضمان فقط تقديم المرشحين الأكثر تأهيلاً.',
+                reason4: 'دعم مستمر',
+                reason4P: 'مساعدة مستمرة حتى بعد التوظيف لضمان الرضا طويل الأمد.',
+                certTitle: 'اعتماداتنا',
+                cert1: 'معتمد من وزارة العمل',
+                cert2: 'معايير التوظيف الدولية',
+                cert3: 'معتمد في إدارة الجودة',
+                cert4: 'ميثاق التوظيف الأخلاقي',
+                teamTitle: 'قابل فريق القيادة لدينا',
+                team1Name: 'أحمد المنصوري',
+                team1Role: 'المؤسس والرئيس التنفيذي',
+                team2Name: 'فاطمة الهاشمي',
+                team2Role: 'مدير العمليات',
+                team3Name: 'راج باتيل',
+                team3Role: 'رئيس التوظيف',
+                team4Name: 'ماريا غونزاليز',
+                team4Role: 'مدير التدريب',
+                offeringsTitle: 'عروضنا',
+                offering1Title: '1. توظيف القوى العاملة',
+                offering1Item1: 'التوظيف في القطاع المنزلي (مدبرات منزل، سائقون، مقدمي رعاية، إلخ)',
+                offering1Item2: 'التوظيف للقطاع التجاري (الشركات، المطاعم، البناء…)',
+                offering2Title: '2. تطوير القوى العاملة',
+                offering2Item1: 'التدريب اللغوي والثقافي',
+                offering2Item2: 'التدريب المهني (الصرف الصحي، فنون الطهي، القيادة…)',
+                offering2Item3: 'التحضير قبل السفر للعمال',
+                jobsTitle: 'فرص عمل',
+                jobsSub: 'استكشف أحدث فرص العمل لدينا وابحث عن تطابقك المثالي',
+                jobFilterCountry: 'البلد:',
+                jobFilterType: 'النوع:',
+                jobFilterSkills: 'المهارات:',
+                jobFilterBtn: 'تطبيق المرشحات',
+                job1Title: 'مدبرة منزل',
+                job1Loc: 'الدوحة، قطر',
+                job1Salary: 'QAR 2,500 - 3,000/شهر',
+                job1Posted: 'نشر منذ 3 أيام',
+                job1Skill1: 'تنظيف',
+                job1Skill2: 'غسيل',
+                job1Skill3: 'تنظيم',
+                job2Title: 'مشرف بناء',
+                job2Loc: 'دبي، الإمارات',
+                job2Salary: 'AED 5,000 - 6,500/شهر',
+                job2Posted: 'نشر منذ أسبوع',
+                job2Skill1: 'إدارة المشاريع',
+                job2Skill2: 'الامتثال للسلامة',
+                job2Skill3: 'قيادة الفريق',
+                job3Title: 'موظف استقبال في فندق',
+                job3Loc: 'الرياض، السعودية',
+                job3Salary: 'SAR 3,800 - 4,500/شهر',
+                job3Posted: 'نشر منذ يومين',
+                job3Skill1: 'خدمة العملاء',
+                job3Skill2: 'التحدث بالإنجليزية',
+                job3Skill3: 'أنظمة الحجز',
+                viewAllBtn: 'عرض جميع فرص العمل',
+                clientTitle: 'للأفراد (مساعدة العملاء)',
+                clientSub: 'هل تبحث عن عامل منزلي؟ قدم طلبك الآن.',
+                step1Title: 'نموذج طلب الخدمة',
+                step1P: 'أكمل نموذجنا التفصيلي لتحديد متطلباتك للمساعدة المنزلية.',
+                step1Btn: 'ابدأ الطلب',
+                step2Title: 'عملية التعاقد',
+                step2P: 'سيقوم فريقنا بإرشادك خلال عملية التعاقد القانوني.',
+                step2Btn: 'اعرف المزيد',
+                step3Title: 'الجدول الزمني للإنجاز',
+                step3P: 'افهم المدة النموذجية من التقديم إلى التوظيف.',
+                step3Btn: 'عرض الجداول الزمنية',
+                step4Title: 'اختيار المرشح',
+                step4P: 'راجع المرشحين الذين تم فحصهم مسبقًا واختر أفضل تطابق.',
+                step4Btn: 'تصفح المرشحين',
+                step5Title: 'التأشيرة والوثائق',
+                step5P: 'نحن نساعد في معالجة التأشيرة وجميع الأوراق اللازمة لعامل منزلك.',
+                step5Btn: 'مساعدة التأشيرة',
+                contactTitle: 'اتصال',
+                contactSub: 'نحن هنا لمساعدتك في جميع احتياجاتك',
+                contactInfoTitle: 'معلومات الاتصال',
+                callUs: 'اتصل بنا',
+                whatsapp: 'واتساب',
+                location: 'موقعنا',
+                address: '123 شارع الأعمال، الدوحة، قطر',
+                chatHeader: 'محادثة مباشرة',
+                chatPlaceholder: 'اكتب رسالتك...',
+                chatSend: 'إرسال',
+                dashboardTitle: 'تسجيل دخول / لوحة تحكم',
+                dashboardSub: 'إدارة حسابك وتتبع طلباتك',
+                feature1Title: 'بوابة العميل',
+                feature1P: 'راقب حالة طلبك وسجلّاته في الوقت الفعلي',
+                feature1Btn: 'تسجيل دخول العميل',
+                feature2Title: 'بوابة صاحب العمل',
+                feature2P: 'مراجعة وتحديث معلومات ووثائق الموظفين',
+                feature2Btn: 'تسجيل دخول صاحب العمل',
+                feature3Title: 'بوابة المشرف',
+                feature3P: 'الإشراف على النظام بأكمله والمستخدمين وإدارته',
+                feature3Btn: 'تسجيل دخول المشرف',
+                feature4Title: 'بوابة التحليلات',
+                feature4P: 'عرض التقارير وتحليلات الأداء',
+                feature4Btn: 'عرض التحليلات',
+                footerCol1Title: 'شروط الخدمة',
+                footerCol1Link1: 'اتفاقية المستخدم',
+                footerCol1Link2: 'الشروط القانونية',
+                footerCol1Link3: 'الأنشطة المحظورة',
+                footerCol1Link4: 'إخلاء المسؤولية',
+                footerCol2Title: 'سياسة الخصوصية',
+                footerCol2Link1: 'جمع البيانات',
+                footerCol2Link2: 'حماية البيانات',
+                footerCol2Link3: 'سياسة ملفات تعريف الارتباط',
+                footerCol2Link4: 'حقوقك',
+                footerCol3Title: 'الاتفاقية التعاقدية',
+                footerCol3Link1: 'عقود الخدمة',
+                footerCol3Link2: 'عملية التوقيع',
+                footerCol3Link3: 'سياسة الإلغاء',
+                footerCol3Link4: 'تسوية النزاعات',
+                footerCol4Title: 'تواصل معنا',
+                contactUsBtn: 'اتصل بنا',
+                supportBtn: 'الدعم',
+                copyright: '© 2023 الروضان. جميع الحقوق محفوظة.',
+                legal1: 'إمكانية الوصول',
+                legal2: 'خريطة الموقع',
+                legal3: 'وظائف',
+                jobApplyBtn: 'تقديم الطلب',
+                jobModalTitle: 'طلب وظيفة',
+                jobModalName: 'الاسم الكامل',
+                jobModalEmail: 'البريد الإلكتروني',
+                jobModalPhone: 'رقم الهاتف',
+                jobModalPosition: 'اختر المنصب',
+                jobModalCover: 'رسالة تغطية / رسالة',
+                jobModalFile: 'رفع السيرة الذاتية',
+                jobModalSubmit: 'تقديم الطلب',
+                clientModalName: 'اسمك الكامل',
+                clientModalEmail: 'بريدك الإلكتروني',
+                clientModalPhone: 'رقم الهاتف',
+                clientModalMsg: 'رسالتك / متطلباتك',
+                clientModalSubmit: 'تقديم الطلب',
+                contactModalTitle: 'اتصل بنا',
+                contactModalName: 'اسمك',
+                contactModalEmail: 'بريدك الإلكتروني',
+                contactModalPhone: 'رقم الهاتف',
+                contactModalMsg: 'رسالتك',
+                contactModalSubmit: 'إرسال الرسالة',
+                supportModalTitle: 'طلب الدعم',
+                supportModalName: 'اسمك',
+                supportModalEmail: 'بريدك الإلكتروني',
+                supportModalPhone: 'رقم الهاتف',
+                supportModalMsg: 'صف مشكلتك',
+                supportModalSubmit: 'تقديم الطلب'
+            }
+        };
+
+        // Function to update all text based on selected language
+        function updateLanguage(lang) {
+            const t = translations[lang];
+
+            // Navbar
+            document.querySelectorAll('.nav-text').forEach((el, i) => {
+                if (t.nav[i]) el.textContent = t.nav[i];
+            });
+            document.querySelector('.logo-text h1').textContent = t.logoTitle;
+            document.querySelector('.logo-text p').innerHTML = t.logoSlogan;
+
+            // Hero
+            document.querySelector('.hero-title').textContent = t.heroTitle;
+            document.querySelector('.hero-subtitle').textContent = t.heroSubtitle;
+            document.querySelectorAll('.hero-btn')[0].textContent = t.heroBtn1;
+            document.querySelectorAll('.hero-btn')[1].textContent = t.heroBtn2;
+
+            // About section
+            document.querySelector('#about .section-title h2').textContent = t.aboutTitle;
+            document.querySelector('.about-text h3').textContent = t.whoWeAre;
+            const aboutPs = document.querySelectorAll('.about-text p');
+            aboutPs[0].textContent = t.aboutP1;
+            aboutPs[1].textContent = t.aboutP2;
+            aboutPs[2].textContent = t.aboutP3;
+
+            // Mission & Vision
+            document.querySelector('.mission h3').innerHTML = `<i class="fas fa-bullseye"></i> ${t.missionTitle}`;
+            const missionPs = document.querySelectorAll('.mission p');
+            missionPs[0].textContent = t.missionP1;
+            missionPs[1].textContent = t.missionP2;
+            document.querySelector('.vision h3').innerHTML = `<i class="fas fa-eye"></i> ${t.visionTitle}`;
+            const visionPs = document.querySelectorAll('.vision p');
+            visionPs[0].textContent = t.visionP1;
+            visionPs[1].textContent = t.visionP2;
+
+            // Why Choose Us
+            document.querySelector('.why-choose-us h3').textContent = t.whyTitle;
+            document.querySelector('.why-choose-us-content p').textContent = t.whyP;
+            const reasons = document.querySelectorAll('.reason h4');
+            const reasonsP = document.querySelectorAll('.reason p');
+            reasons[0].textContent = t.reason1;
+            reasonsP[0].textContent = t.reason1P;
+            reasons[1].textContent = t.reason2;
+            reasonsP[1].textContent = t.reason2P;
+            reasons[2].textContent = t.reason3;
+            reasonsP[2].textContent = t.reason3P;
+            reasons[3].textContent = t.reason4;
+            reasonsP[3].textContent = t.reason4P;
+
+            // Certifications
+            document.querySelector('.certifications .section-title').textContent = t.certTitle;
+            const certItems = document.querySelectorAll('.cert-item p');
+            certItems[0].textContent = t.cert1;
+            certItems[1].textContent = t.cert2;
+            certItems[2].textContent = t.cert3;
+            certItems[3].textContent = t.cert4;
+
+            // Team
+            document.querySelector('.team-section h3').textContent = t.teamTitle;
+            const teamNames = document.querySelectorAll('.member-info h4');
+            const teamRoles = document.querySelectorAll('.member-info p');
+            teamNames[0].textContent = t.team1Name;
+            teamRoles[0].textContent = t.team1Role;
+            teamNames[1].textContent = t.team2Name;
+            teamRoles[1].textContent = t.team2Role;
+            teamNames[2].textContent = t.team3Name;
+            teamRoles[2].textContent = t.team3Role;
+            teamNames[3].textContent = t.team4Name;
+            teamRoles[3].textContent = t.team4Role;
+
+            // Offerings
+            document.querySelector('.offerings-section h2').textContent = t.offeringsTitle;
+            const offeringTitles = document.querySelectorAll('.offering-box h3');
+            offeringTitles[0].textContent = t.offering1Title;
+            offeringTitles[1].textContent = t.offering2Title;
+            const offeringItems = document.querySelectorAll('.offering-box ul li');
+            offeringItems[0].textContent = t.offering1Item1;
+            offeringItems[1].textContent = t.offering1Item2;
+            offeringItems[2].textContent = t.offering2Item1;
+            offeringItems[3].textContent = t.offering2Item2;
+            offeringItems[4].textContent = t.offering2Item3;
+
+            // Jobs section
+            document.querySelector('#jobs .section-title h2').textContent = t.jobsTitle;
+            document.querySelector('#jobs .section-title p').textContent = t.jobsSub;
+            document.querySelector('label[for="country-filter"]').innerHTML = `<i class="fas fa-globe"></i> ${t.jobFilterCountry}`;
+            document.querySelector('label[for="type-filter"]').innerHTML = `<i class="fas fa-briefcase"></i> ${t.jobFilterType}`;
+            document.querySelector('label[for="skills-filter"]').innerHTML = `<i class="fas fa-tools"></i> ${t.jobFilterSkills}`;
+            document.getElementById('filterBtn').textContent = t.jobFilterBtn;
+
+            const jobCards = document.querySelectorAll('.job-card');
+            // Job 1
+            const job1 = jobCards[0];
+            job1.querySelector('.job-header h3').textContent = t.job1Title;
+            const job1Details = job1.querySelectorAll('.job-details p');
+            job1Details[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${t.job1Loc}`;
+            job1Details[1].innerHTML = `<i class="fas fa-money-bill-wave"></i> ${t.job1Salary}`;
+            job1Details[2].innerHTML = `<i class="fas fa-calendar-alt"></i> ${t.job1Posted}`;
+            const job1Skills = job1.querySelectorAll('.job-skills span');
+            job1Skills[0].textContent = t.job1Skill1;
+            job1Skills[1].textContent = t.job1Skill2;
+            job1Skills[2].textContent = t.job1Skill3;
+            job1.querySelector('.apply-btn').textContent = t.jobApplyBtn;
+
+            // Job 2
+            const job2 = jobCards[1];
+            job2.querySelector('.job-header h3').textContent = t.job2Title;
+            const job2Details = job2.querySelectorAll('.job-details p');
+            job2Details[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${t.job2Loc}`;
+            job2Details[1].innerHTML = `<i class="fas fa-money-bill-wave"></i> ${t.job2Salary}`;
+            job2Details[2].innerHTML = `<i class="fas fa-calendar-alt"></i> ${t.job2Posted}`;
+            const job2Skills = job2.querySelectorAll('.job-skills span');
+            job2Skills[0].textContent = t.job2Skill1;
+            job2Skills[1].textContent = t.job2Skill2;
+            job2Skills[2].textContent = t.job2Skill3;
+            job2.querySelector('.apply-btn').textContent = t.jobApplyBtn;
+
+            // Job 3
+            const job3 = jobCards[2];
+            job3.querySelector('.job-header h3').textContent = t.job3Title;
+            const job3Details = job3.querySelectorAll('.job-details p');
+            job3Details[0].innerHTML = `<i class="fas fa-map-marker-alt"></i> ${t.job3Loc}`;
+            job3Details[1].innerHTML = `<i class="fas fa-money-bill-wave"></i> ${t.job3Salary}`;
+            job3Details[2].innerHTML = `<i class="fas fa-calendar-alt"></i> ${t.job3Posted}`;
+            const job3Skills = job3.querySelectorAll('.job-skills span');
+            job3Skills[0].textContent = t.job3Skill1;
+            job3Skills[1].textContent = t.job3Skill2;
+            job3Skills[2].textContent = t.job3Skill3;
+            job3.querySelector('.apply-btn').textContent = t.jobApplyBtn;
+
+            document.getElementById('viewAllJobsBtn').textContent = t.viewAllBtn;
+
+            // Client Assistance
+            document.querySelector('#faq .section-title h2').textContent = t.clientTitle;
+            document.querySelector('#faq .section-title p').textContent = t.clientSub;
+            const steps = document.querySelectorAll('.step-box');
+            steps[0].querySelector('h3').textContent = t.step1Title;
+            steps[0].querySelector('p').textContent = t.step1P;
+            steps[0].querySelector('.step-btn').textContent = t.step1Btn;
+            steps[1].querySelector('h3').textContent = t.step2Title;
+            steps[1].querySelector('p').textContent = t.step2P;
+            steps[1].querySelector('.step-btn').textContent = t.step2Btn;
+            steps[2].querySelector('h3').textContent = t.step3Title;
+            steps[2].querySelector('p').textContent = t.step3P;
+            steps[2].querySelector('.step-btn').textContent = t.step3Btn;
+            steps[3].querySelector('h3').textContent = t.step4Title;
+            steps[3].querySelector('p').textContent = t.step4P;
+            steps[3].querySelector('.step-btn').textContent = t.step4Btn;
+            steps[4].querySelector('h3').textContent = t.step5Title;
+            steps[4].querySelector('p').textContent = t.step5P;
+            steps[4].querySelector('.step-btn').textContent = t.step5Btn;
+
+            // Contact section
+            document.querySelector('#contact .section-title h2').textContent = t.contactTitle;
+            document.querySelector('#contact .section-title p').textContent = t.contactSub;
+            document.querySelector('.contact-info h4').textContent = t.contactInfoTitle;
+            const infoItems = document.querySelectorAll('.info-content h4');
+            infoItems[0].textContent = t.callUs;
+            infoItems[1].textContent = t.whatsapp;
+            infoItems[2].textContent = t.location;
+            document.querySelector('.info-content p').textContent = t.address;
+            document.querySelector('.chat-header h4').textContent = t.chatHeader;
+            document.querySelector('.chat-input input').placeholder = t.chatPlaceholder;
+            document.querySelector('.chat-send-btn').textContent = t.chatSend;
+
+            // Dashboard
+            document.querySelector('.dashboard-section .section-title h2').textContent = t.dashboardTitle;
+            document.querySelector('.dashboard-section .section-title p').textContent = t.dashboardSub;
+            const featureTitles = document.querySelectorAll('.feature-box h3');
+            const featurePs = document.querySelectorAll('.feature-box p');
+            const featureBtns = document.querySelectorAll('.feature-btn');
+            featureTitles[0].textContent = t.feature1Title;
+            featurePs[0].textContent = t.feature1P;
+            featureBtns[0].textContent = t.feature1Btn;
+            featureTitles[1].textContent = t.feature2Title;
+            featurePs[1].textContent = t.feature2P;
+            featureBtns[1].textContent = t.feature2Btn;
+            featureTitles[2].textContent = t.feature3Title;
+            featurePs[2].textContent = t.feature3P;
+            featureBtns[2].textContent = t.feature3Btn;
+            featureTitles[3].textContent = t.feature4Title;
+            featurePs[3].textContent = t.feature4P;
+            featureBtns[3].textContent = t.feature4Btn;
+
+            // Footer
+            const footerHeadings = document.querySelectorAll('.footer-heading');
+            footerHeadings[0].textContent = t.footerCol1Title;
+            footerHeadings[1].textContent = t.footerCol2Title;
+            footerHeadings[2].textContent = t.footerCol3Title;
+            footerHeadings[3].textContent = t.footerCol4Title;
+
+            const footerLinks = document.querySelectorAll('.footer-links a');
+            footerLinks[0].innerHTML = `<i class="fas fa-file-contract"></i> ${t.footerCol1Link1}`;
+            footerLinks[1].innerHTML = `<i class="fas fa-gavel"></i> ${t.footerCol1Link2}`;
+            footerLinks[2].innerHTML = `<i class="fas fa-ban"></i> ${t.footerCol1Link3}`;
+            footerLinks[3].innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${t.footerCol1Link4}`;
+            footerLinks[4].innerHTML = `<i class="fas fa-database"></i> ${t.footerCol2Link1}`;
+            footerLinks[5].innerHTML = `<i class="fas fa-shield-alt"></i> ${t.footerCol2Link2}`;
+            footerLinks[6].innerHTML = `<i class="fas fa-cookie-bite"></i> ${t.footerCol2Link3}`;
+            footerLinks[7].innerHTML = `<i class="fas fa-user-secret"></i> ${t.footerCol2Link4}`;
+            footerLinks[8].innerHTML = `<i class="fas fa-handshake"></i> ${t.footerCol3Link1}`;
+            footerLinks[9].innerHTML = `<i class="fas fa-file-signature"></i> ${t.footerCol3Link2}`;
+            footerLinks[10].innerHTML = `<i class="fas fa-undo-alt"></i> ${t.footerCol3Link3}`;
+            footerLinks[11].innerHTML = `<i class="fas fa-balance-scale"></i> ${t.footerCol3Link4}`;
+
+            document.querySelector('.footer-btn.contact-btn').innerHTML = `<i class="fas fa-envelope"></i> ${t.contactUsBtn}`;
+            document.querySelector('.footer-btn.support-btn').innerHTML = `<i class="fas fa-headset"></i> ${t.supportBtn}`;
+            document.querySelector('.copyright').textContent = t.copyright;
+            const legalLinks = document.querySelectorAll('.legal-links a');
+            legalLinks[0].textContent = t.legal1;
+            legalLinks[1].textContent = t.legal2;
+            legalLinks[2].textContent = t.legal3;
+
+            // Update modal titles
+            document.querySelector('#jobModal h3').textContent = t.jobModalTitle;
+            document.querySelector('#clientModal h3').textContent = t.clientModalTitle;
+            document.querySelector('#contactModal h3').textContent = t.contactModalTitle;
+            document.querySelector('#supportModal h3').textContent = t.supportModalTitle;
+
+            // Update modal placeholders
+            const jobModalInputs = document.querySelectorAll('#jobApplicationForm input, #jobApplicationForm textarea, #jobApplicationForm select');
+            jobModalInputs[0].placeholder = t.jobModalName;
+            jobModalInputs[1].placeholder = t.jobModalEmail;
+            jobModalInputs[2].placeholder = t.jobModalPhone;
+            const jobSelect = document.querySelector('#jobApplicationForm select');
+            jobSelect.options[0].text = t.jobModalPosition;
+            jobModalInputs[4].placeholder = t.jobModalCover; // textarea
+            // file input label? Not easily changed, skip for now.
+
+            const clientModalInputs = document.querySelectorAll('#clientForm input, #clientForm textarea');
+            clientModalInputs[0].placeholder = t.clientModalName;
+            clientModalInputs[1].placeholder = t.clientModalEmail;
+            clientModalInputs[2].placeholder = t.clientModalPhone;
+            clientModalInputs[3].placeholder = t.clientModalMsg;
+
+            const contactModalInputs = document.querySelectorAll('#contactForm input, #contactForm textarea');
+            contactModalInputs[0].placeholder = t.contactModalName;
+            contactModalInputs[1].placeholder = t.contactModalEmail;
+            contactModalInputs[2].placeholder = t.contactModalPhone;
+            contactModalInputs[3].placeholder = t.contactModalMsg;
+
+            const supportModalInputs = document.querySelectorAll('#supportForm input, #supportForm textarea');
+            supportModalInputs[0].placeholder = t.supportModalName;
+            supportModalInputs[1].placeholder = t.supportModalEmail;
+            supportModalInputs[2].placeholder = t.supportModalPhone;
+            supportModalInputs[3].placeholder = t.supportModalMsg;
+
+            document.querySelector('#jobApplicationForm .submit-btn').textContent = t.jobModalSubmit;
+            document.querySelector('#clientForm .submit-btn').textContent = t.clientModalSubmit;
+            document.querySelector('#contactForm .submit-btn').textContent = t.contactModalSubmit;
+            document.querySelector('#supportForm .submit-btn').textContent = t.supportModalSubmit;
+
+            // Update current language display
+            const langMap = { en: 'English', ur: 'اردو', ar: 'العربية', qa: 'قطري' };
+            document.querySelector('.current-language').textContent = langMap[lang];
+        }
+
+        // Language switching
+        document.querySelectorAll('.language-dropdown a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                const dir = this.getAttribute('data-dir');
+                document.body.setAttribute('dir', dir);
+                updateLanguage(lang);
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('show');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('show')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // WhatsApp integration
+        document.querySelector('.whatsapp-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.open('https://wa.me/1234567890', '_blank');
+        });
+        
+        // Chat functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.querySelector('.chat-input input');
+            const chatSendBtn = document.querySelector('.chat-send-btn');
+            const chatMessages = document.querySelector('.chat-messages');
+            
+            chatSendBtn.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') sendMessage();
+            });
+            
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                if (message) {
+                    const userMessage = document.createElement('div');
+                    userMessage.className = 'chat-message user-message';
+                    userMessage.textContent = message;
+                    chatMessages.appendChild(userMessage);
+                    chatInput.value = '';
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    setTimeout(() => {
+                        const botMessage = document.createElement('div');
+                        botMessage.className = 'chat-message bot-message';
+                        botMessage.textContent = 'Thanks for your message! Our team will respond shortly.';
+                        chatMessages.appendChild(botMessage);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 1000);
+                }
+            }
+        });
+        
+        // Client Assistance Modal
+        const clientModal = document.getElementById('clientModal');
+        const closeClientModal = document.getElementById('closeClientModal');
+        const clientModalTitle = document.getElementById('clientModalTitle');
+        const clientStep = document.getElementById('clientStep');
+        const clientForm = document.getElementById('clientForm');
+
+        document.querySelectorAll('.step-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const title = this.getAttribute('data-title');
+                const step = this.getAttribute('data-step');
+                clientModalTitle.textContent = title;
+                clientStep.value = step;
+                clientModal.style.display = 'flex';
+            });
+        });
+
+        closeClientModal.addEventListener('click', () => clientModal.style.display = 'none');
+        window.addEventListener('click', (e) => {
+            if (e.target === clientModal) clientModal.style.display = 'none';
+        });
+
+        clientForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your request! We will contact you shortly.');
+            clientModal.style.display = 'none';
+            this.reset();
+        });
+
+        // Footer modals
+        const contactModal = document.getElementById('contactModal');
+        const supportModal = document.getElementById('supportModal');
+        const closeContactModal = document.getElementById('closeContactModal');
+        const closeSupportModal = document.getElementById('closeSupportModal');
+        const contactForm = document.getElementById('contactForm');
+        const supportForm = document.getElementById('supportForm');
+
+        document.getElementById('contactUsBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            contactModal.style.display = 'flex';
+        });
+
+        document.getElementById('supportBtn').addEventListener('click', (e) => {
+            e.preventDefault();
+            supportModal.style.display = 'flex';
+        });
+
+        closeContactModal.addEventListener('click', () => contactModal.style.display = 'none');
+        closeSupportModal.addEventListener('click', () => supportModal.style.display = 'none');
+        window.addEventListener('click', (e) => {
+            if (e.target === contactModal) contactModal.style.display = 'none';
+            if (e.target === supportModal) supportModal.style.display = 'none';
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for contacting us! We will reply soon.');
+            contactModal.style.display = 'none';
+            contactForm.reset();
+        });
+
+        supportForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Support request submitted. We will assist you shortly.');
+            supportModal.style.display = 'none';
+            supportForm.reset();
+        });
+
+        // Other buttons
+        document.querySelectorAll('.feature-btn, .footer-btn:not(#contactUsBtn):not(#supportBtn)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert(`${this.textContent.trim()} functionality would be implemented here`);
+            });
+        });
+
+        // Trigger animations when sections come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.style.animationPlayState = 'running';
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.about-text p, .about-image, .mission, .vision, .reason, .cert-item, .team-member, .step-box, .job-card, .contact-info, .chat-box, .feature-box').forEach(element => {
+                element.style.animationPlayState = 'paused';
+                observer.observe(element);
+            });
+        });
+
+        // Job Modal functionality
+        const jobModal = document.getElementById('jobModal');
+        const closeModal = document.getElementById('closeModal');
+        const filterBtn = document.getElementById('filterBtn');
+        const viewAllBtn = document.getElementById('viewAllJobsBtn');
+        const applyBtns = document.querySelectorAll('.job-apply-btn');
+
+        function openJobModal() { jobModal.style.display = 'flex'; }
+        function closeJobModal() { jobModal.style.display = 'none'; }
+
+        filterBtn.addEventListener('click', openJobModal);
+        viewAllBtn.addEventListener('click', openJobModal);
+        applyBtns.forEach(btn => btn.addEventListener('click', openJobModal));
+
+        closeModal.addEventListener('click', closeJobModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === jobModal) closeJobModal();
+        });
+
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Your application has been submitted! We will contact you shortly.');
+            closeJobModal();
+            this.reset();
+        });
+    </script>
+</body>
+</html>
